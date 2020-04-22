@@ -1,0 +1,41 @@
+.Footer {
+  position: absolute;
+  width: 375px;
+  height: 73px;
+  left: -0.42px;
+  top: 594px;
+
+  background: #EAEAEA;
+  border-top: 1px solid #000000;
+
+  p {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+
+    em {
+      font-style: italic;
+      font-weight: bold;
+
+      color: #000000;
+      margin: .4em;
+    }
+
+    sub {
+      font-size: 12px;
+      line-height: 14px;
+      text-align: center;
+
+      color: #666666;
+    }
+
+    img {
+      margin-right: .4em;
+    }
+
+    color: #666666;
+  }
+}
