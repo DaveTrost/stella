@@ -1,0 +1,33 @@
+.ButtonWhite {
+  border: 1px solid #000000;
+  background: #FFFFFF;
+  label {
+    color: #000000;
+  }
+}
+
+.ButtonBlack {
+  border: none;
+  background: #000000;
+  label {  
+    color: #FFFFFF;
+  } 
+}
+
+.ButtonWhite, .ButtonBlack {
+  outline: none;
+  border-radius: 3px;
+}
+
+label {  
+  font-family: Perpetua;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+}
