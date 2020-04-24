@@ -1,0 +1,29 @@
+.StellaSez {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+
+  .avatar {
+    width: 38.78px;
+    height: 38.78px;
+    
+    padding: 5px;
+    padding-bottom: 3px;
+    
+    img {
+      width: 100%;
+      border-radius: 50%;
+    }
+  }
+
+  .message {
+    width: 288.27px;
+
+    background: #F9F9F9;
+    border-radius: 20px;
+    border-bottom-left-radius: 5px;
+    padding: 12px 4px 9px 16px;
+  }
+}
