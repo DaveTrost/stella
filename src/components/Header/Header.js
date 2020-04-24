@@ -1,6 +1,6 @@
 import React from 'react';
-import stellaLogo from '../assets/STELLA LOGO 1.png';
-import phoneImg from '../assets/Phone.png';
+import stellaLogo from '../../assets/STELLA LOGO 1.png';
+import phoneImg from '../../assets/Phone.png';
 import './Header.scss';
 
 function Header() {
