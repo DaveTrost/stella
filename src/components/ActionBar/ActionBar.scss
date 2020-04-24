@@ -1,0 +1,14 @@
+.ActionBar {
+  display: flex;
+  margin: 18px;
+  margin-top: 10px;
+  margin-bottom: 33px;
+  
+  .goBack {
+    margin-right: 10px;
+  }
+
+  .action {
+    flex-grow: 1;
+  }
+}

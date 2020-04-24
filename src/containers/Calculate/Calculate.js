@@ -2,6 +2,7 @@ import React from 'react';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import StellaSez from '../../components/StellaSez/StellaSez';
 import Message from '../../components/StellaSez/Message';
+import ActionBar from '../../components/ActionBar/ActionBar';
 import './Calculate.scss';
 
 function Calculate({ avatar, children }) {
@@ -35,6 +36,7 @@ function Calculate({ avatar, children }) {
           Let me know when you're ready to see pricing!
         `} />
       </StellaSez>
+      <ActionBar actionText='Calculate Savings' />
     </div>
   );
 }
