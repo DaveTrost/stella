@@ -2,9 +2,9 @@ import React from 'react';
 import './ActionBar.scss';
 import Button from '../Button/Button';
 
-function ActionBar({ actionText, smallText }) {
+function ActionBar({ actionText, smallText, isDisplayed }) {
   return (
-    <div className='ActionBar'>
+    <div className={`ActionBar ${!isDisplayed && 'hidden'}`}>
       <div className='buttonRow'>
         <div className='goBack'>
           <Button

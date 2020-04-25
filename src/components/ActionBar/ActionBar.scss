@@ -8,6 +8,10 @@
   flex-direction: column;
   justify-content: flex-end;
 
+  &.hidden {
+    visibility: hidden;
+  }
+
   .buttonRow {
     display: flex;
     .goBack {
