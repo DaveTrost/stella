@@ -5,6 +5,7 @@ import Message from '../../components/StellaSez/Message';
 import ActionBar from '../../components/ActionBar/ActionBar';
 import Footer from '../../components/Footer/Footer';
 import './Result.scss';
+import InfoTable from '../../components/InfoTable/InfoTable';
 
 const finePrint = `To help you go solar, we need your approval to contact you. 
   By clicking above, you agree that [Company] may call & text you about 
@@ -13,11 +14,22 @@ const finePrint = `To help you go solar, we need your approval to contact you.
   Msg & data rates may apply to text messages. Consent for calls & texts is optional. 
   You can opt-out anytime.`;
 const avatar = 'https://stella-dev.demand-iq.com/media/avatars/65.jpg';
+const results = [
+  {
+    headerText: 'Approximate Lifetime Savings',
+    text: '$63,500',
+    subText: 'Over 25 years',
+  },
+]
 
 function Result() {
   return (
     <div className='Result'>
       <Header showStartOver={true} />
+      <StellaSez avatar={avatar}>
+        <Message text={`Check out these savings!`} />
+        <InfoTable { ...results[0] } />
+      </StellaSez>
       <StellaSez avatar={avatar}>
         <Message text={`
           Let me know when you're ready to see pricing!
