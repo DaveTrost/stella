@@ -20,7 +20,23 @@ const results = [
     text: '$63,500',
     subText: 'Over 25 years',
   },
-]
+  {
+    headerText: 'Increase in Home Value',
+    text: '4.1%',
+    subText: 'According to Zillow',
+  },
+  {
+    headerText: 'Environmental Impact',
+    text: '500',
+    subText: 'Tons of CO2 avoided',
+  },
+  {
+    headerText: 'Recommended System',
+    // text: '10-12 <sub>kW</sub>',
+    text: '10-12 kW',
+    subText: '(33-40 panels)',
+  },
+];
 
 function Result() {
   return (
