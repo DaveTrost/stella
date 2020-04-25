@@ -16,26 +16,6 @@ function Calculate({ avatar, children }) {
           to calculate your savings
         `} />
       </StellaSez>
-      <StellaSez avatar='https://stella-dev.demand-iq.com/media/avatars/65.jpg'>
-        <Message text={`
-          Hang on. I am calculating your savings...
-        `} />
-      </StellaSez>
-      <StellaSez avatar='https://stella-dev.demand-iq.com/media/avatars/65.jpg'>
-        <Message text={`
-          Sizing your solar system...
-        `} />
-      </StellaSez>
-      <StellaSez avatar='https://stella-dev.demand-iq.com/media/avatars/65.jpg'>
-        <Message text={`
-          Checking on energy prices...
-        `} />
-      </StellaSez>
-      <StellaSez avatar='https://stella-dev.demand-iq.com/media/avatars/65.jpg'>
-        <Message text={`
-          Let me know when you're ready to see pricing!
-        `} />
-      </StellaSez>
       <ActionBar actionText='Calculate Savings' />
     </div>
   );
