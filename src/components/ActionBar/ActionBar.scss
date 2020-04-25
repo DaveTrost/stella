@@ -1,9 +1,11 @@
 .ActionBar {
-  display: flex;
+  flex-grow: 1;
   margin: 18px;
   margin-top: 10px;
-  margin-bottom: 33px;
-  
+  margin-bottom: 25px;
+
+  display: flex;
+  align-items: flex-end;
   .goBack {
     margin-right: 10px;
   }
