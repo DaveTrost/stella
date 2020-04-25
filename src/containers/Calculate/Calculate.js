@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { getUserData, getSolarCoSkin } from '../../store/calculate/reducer';
 import Header from '../../components/Header/Header';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import StellaSez from '../../components/StellaSez/StellaSez';
@@ -8,17 +10,19 @@ import ActionBar from '../../components/ActionBar/ActionBar';
 import Footer from '../../components/Footer/Footer';
 import './Calculate.scss';
 
-const avatar = 'https://stella-dev.demand-iq.com/media/avatars/65.jpg';
-
 function Calculate() {
-  const [avgBill, setAvgBill] = useState('250')
+  const solarCoSkin = useSelector(state => getSolarCoSkin(state));
+  const userData = useSelector(state => getUserData(state));
+  const [avgBill, setAvgBill] = useState(userData.avgBill)
+
+  const dispatch = useDispatch();
   const handleChange = event => setAvgBill(event.target.value);
 
   return (
     <div className='Calculate'>
       <Header showStartOver={true} />
       <ProgressBar now={66} />
-      <StellaSez avatar={avatar}>
+      <StellaSez avatar={solarCoSkin.avatar}>
         <Message text={`
           Almost done! 
           I just need your most recent monthly electric bill 

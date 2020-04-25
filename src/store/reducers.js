@@ -1,10 +1,5 @@
-import Immutable from 'seamless-immutable';
+import calculate from './calculate/reducer';
 
-const initialState = Immutable({});
-
-export default function reduce(state = initialState, action = {}) {
-  switch (action.type) {
-    default:
-      return state;
-  }
-}
+export {
+  calculate
+};
