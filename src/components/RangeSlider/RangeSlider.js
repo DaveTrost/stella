@@ -9,7 +9,6 @@ function RangeSlider({ sliderValue, minValue, maxValue, handleChange }) {
   return (
     <div className='RangeSlider'>
       <table className='sliderTooltip' style={{left: `${sliderValAsPercent}`}}>
-      {/* <table className='sliderTooltip'> */}
         <thead>
           <tr><th>My electric bill</th></tr>
         </thead>
