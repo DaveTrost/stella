@@ -2,10 +2,10 @@ import React from 'react';
 import Header from '../../components/Header/Header';
 import StellaSez from '../../components/StellaSez/StellaSez';
 import Message from '../../components/StellaSez/Message';
+import InfoScroller from '../InfoScroller/InfoScroller';
 import ActionBar from '../../components/ActionBar/ActionBar';
 import Footer from '../../components/Footer/Footer';
 import './Result.scss';
-import InfoTable from '../../components/InfoTable/InfoTable';
 
 const finePrint = `To help you go solar, we need your approval to contact you. 
   By clicking above, you agree that [Company] may call & text you about 
@@ -44,7 +44,7 @@ function Result() {
       <Header showStartOver={true} />
       <StellaSez avatar={avatar}>
         <Message text={`Check out these savings!`} />
-        <InfoTable { ...results[0] } />
+        <InfoScroller items={results} />
       </StellaSez>
       <StellaSez avatar={avatar}>
         <Message text={`
