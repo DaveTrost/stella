@@ -5,12 +5,29 @@
   margin-bottom: 25px;
 
   display: flex;
-  align-items: flex-end;
-  .goBack {
-    margin-right: 10px;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  .buttonRow {
+    display: flex;
+    .goBack {
+      margin-right: 10px;
+    }
+  
+    .action {
+      flex-grow: 1;
+    }
   }
 
-  .action {
-    flex-grow: 1;
-  }
+  .smallText {
+    position: relative;
+    top: 10px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: .8em;
+    line-height: .8em;
+    
+    color: #666666;  }
 }
