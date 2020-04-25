@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './StellaSez.scss';
 
 function StellaSez({ avatar, children }) {
@@ -13,5 +14,9 @@ function StellaSez({ avatar, children }) {
     </div>
   );
 }
+
+StellaSez.propTypes = {
+  avatar: PropTypes.string.isRequired,
+};
 
 export default StellaSez;

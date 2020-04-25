@@ -1,6 +1,7 @@
 import React from 'react';
-import './ActionBar.scss';
+import PropTypes from 'prop-types';
 import Button from '../Button/Button';
+import './ActionBar.scss';
 
 function ActionBar({ actionText, smallText, isDisplayed }) {
   return (
@@ -14,18 +15,28 @@ function ActionBar({ actionText, smallText, isDisplayed }) {
             height='40px'
           />
         </div>
-        <div className='action'>
-          <Button
-            text={actionText}
-            height='40px'
-          />
+        {actionText &&
+          <div className='action'>
+            <Button
+              text={isDisplayed ? actionText : ''}
+              height='40px'
+            />
+          </div>
+        }
+      </div>
+      {smallText && 
+        <div className='smallText'>
+          <small>{smallText}</small>
         </div>
-      </div>
-      <div className='smallText'>
-        <small>{smallText}</small>
-      </div>
+      }
     </div>
   );
 }
+
+ActionBar.propTypes = {
+  actionText: PropTypes.string,
+  smallText: PropTypes.string,
+  isDisplayed: PropTypes.bool,
+};
 
 export default ActionBar;

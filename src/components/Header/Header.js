@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Button from '../Button/Button';
 import stellaLogo from '../../assets/STELLA LOGO 1.png';
 import startOver from '../../assets/startOver.png';
@@ -25,5 +26,9 @@ function Header({ showStartOver }) {
     </header>
   );
 }
+
+Header.propTypes = {
+  showStartOver: PropTypes.bool,
+};
 
 export default Header;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Button.scss';
 
 function Button({ color, text, image, width, height }) {
@@ -16,5 +17,13 @@ function Button({ color, text, image, width, height }) {
     </button>
   );
 }
+
+Button.propTypes = {
+  color: PropTypes.oneOf(['white', 'black']),
+  text: PropTypes.string.isRequired,
+  image: PropTypes.string,
+  width: PropTypes.string,
+  height: PropTypes.string,
+};
 
 export default Button;
