@@ -4,7 +4,7 @@ import Calculate2 from './containers/Calculate/Calculate2';
 import Result from './containers/Result/Result';
 import './App.scss';
 
-const testState = 1;
+const testState = 3;
 
 function App() {
   return (
