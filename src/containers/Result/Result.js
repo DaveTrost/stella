@@ -12,12 +12,13 @@ const finePrint = `To help you go solar, we need your approval to contact you.
   using pre-recorded messages or an autodialer, even if your number is on a "Do Not Call" list. 
   Msg & data rates may apply to text messages. Consent for calls & texts is optional. 
   You can opt-out anytime.`;
+const avatar = 'https://stella-dev.demand-iq.com/media/avatars/65.jpg';
 
-function Result({ avatar, children }) {
+function Result() {
   return (
     <div className='Result'>
       <Header showStartOver={true} />
-      <StellaSez avatar='https://stella-dev.demand-iq.com/media/avatars/65.jpg'>
+      <StellaSez avatar={avatar}>
         <Message text={`
           Let me know when you're ready to see pricing!
         `} />

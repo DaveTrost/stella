@@ -7,22 +7,24 @@ import ActionBar from '../../components/ActionBar/ActionBar';
 import Footer from '../../components/Footer/Footer';
 import './Calculate.scss';
 
-function Calculate2({ avatar, children }) {
+const avatar = 'https://stella-dev.demand-iq.com/media/avatars/65.jpg';
+
+function Calculate2() {
   return (
     <div className='Calculate'>
       <Header />
       <ProgressBar now={100} />
-      <StellaSez avatar='https://stella-dev.demand-iq.com/media/avatars/65.jpg'>
+      <StellaSez avatar={avatar}>
         <Message text={`
           Hang on. I am calculating your savings...
         `} />
       </StellaSez>
-      <StellaSez avatar='https://stella-dev.demand-iq.com/media/avatars/65.jpg'>
+      <StellaSez avatar={avatar}>
         <Message text={`
           Sizing your solar system...
         `} />
       </StellaSez>
-      <StellaSez avatar='https://stella-dev.demand-iq.com/media/avatars/65.jpg'>
+      <StellaSez avatar={avatar}>
         <Message text={`
           Checking on energy prices...
         `} />

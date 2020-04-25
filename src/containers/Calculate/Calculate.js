@@ -8,7 +8,9 @@ import ActionBar from '../../components/ActionBar/ActionBar';
 import Footer from '../../components/Footer/Footer';
 import './Calculate.scss';
 
-function Calculate({ avatar, children }) {
+const avatar = 'https://stella-dev.demand-iq.com/media/avatars/65.jpg';
+
+function Calculate() {
   const [avgBill, setAvgBill] = useState(250)
   const handleChange = event => setAvgBill(event.target.value);
 
@@ -16,7 +18,7 @@ function Calculate({ avatar, children }) {
     <div className='Calculate'>
       <Header showStartOver={true} />
       <ProgressBar now={66} />
-      <StellaSez avatar='https://stella-dev.demand-iq.com/media/avatars/65.jpg'>
+      <StellaSez avatar={avatar}>
         <Message text={`
           Almost done! 
           I just need your most recent monthly electric bill 
