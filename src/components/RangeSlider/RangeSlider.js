@@ -2,8 +2,7 @@ import React from 'react';
 import './RangeSlider.scss';
 import './RangeSliderTooltip.scss';
 
-function RangeSlider({ sliderValue, minValue, maxValue, handleChange }) {
-  handleChange = () => 0;
+function RangeSlider({ sliderValue, minValue, maxValue, stepValue, handleChange }) {
   const sliderValAsPercent = sliderValue / maxValue * 100 + '%';
 
   return (
