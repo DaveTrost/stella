@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './RangeSlider.scss';
 import './RangeSliderTooltip.scss';
 
@@ -32,5 +33,13 @@ function RangeSlider({ sliderValue, minValue, maxValue, stepValue, handleChange 
     </div>
   );
 }
+
+RangeSlider.propTypes = {
+  sliderValue: PropTypes.string.isRequired,
+  minValue: PropTypes.string.isRequired,
+  maxValue: PropTypes.string.isRequired,
+  stepValue: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired,
+};
 
 export default RangeSlider;

@@ -11,7 +11,7 @@ import './Calculate.scss';
 const avatar = 'https://stella-dev.demand-iq.com/media/avatars/65.jpg';
 
 function Calculate() {
-  const [avgBill, setAvgBill] = useState(250)
+  const [avgBill, setAvgBill] = useState('250')
   const handleChange = event => setAvgBill(event.target.value);
 
   return (
@@ -27,8 +27,8 @@ function Calculate() {
       </StellaSez>
       <RangeSlider 
         sliderValue={avgBill} 
-        minValue={0} maxValue={1000} 
-        stepValue={10}
+        minValue='0' maxValue='1000'
+        stepValue='10'
         handleChange={handleChange} />
       <ActionBar actionText='Calculate Savings' isDisplayed={true} />
       <Footer />
