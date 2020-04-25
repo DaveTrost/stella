@@ -3,11 +3,13 @@ import './RangeSlider.scss';
 import './RangeSliderTooltip.scss';
 
 function RangeSlider({ sliderValue, minValue, maxValue, stepValue, handleChange }) {
-  const sliderValAsPercent = sliderValue / maxValue * 100 + '%';
-
+  const sliderValAsPercent = sliderValue / maxValue * 100;
+  const sliderButtonWidth = 34;
+  const sliderValWithOffset = `calc(${sliderButtonWidth / 2}px + (100% - ${sliderButtonWidth}px) * ${sliderValue / maxValue})`;
+  
   return (
     <div className='RangeSlider'>
-      <table className='sliderTooltip' style={{left: `${sliderValAsPercent}`}}>
+      <table className='sliderTooltip' style={{left: `${sliderValWithOffset}`}}>
         <thead>
           <tr><th>My electric bill</th></tr>
         </thead>
