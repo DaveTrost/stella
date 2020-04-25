@@ -18,8 +18,15 @@ function RangeSlider({ sliderValue, minValue, maxValue, handleChange }) {
         </tbody>
       </table>
       <div className='sliderInput'>
-        <div className='sliderFill' style={{width: `${sliderValAsPercent}`}}></div>
-        <input className='slider' onChange={handleChange} type='range' min={minValue} max={maxValue} value={sliderValue} defaultValue={50} step={10} id='avgCostRange' />
+        <div className='sliderFilled' style={{width: `${sliderValAsPercent}%`}}></div>
+        <div className='sliderUnfilled' style={{width: `${100 - sliderValAsPercent}%`}}></div>
+        <input 
+          className='slider' 
+          onChange={handleChange} 
+          type='range' 
+          value={sliderValue} 
+          min={minValue} max={maxValue} 
+          step={stepValue} />
       </div>
     </div>
   );
