@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { getStyleSkin } from '../../store/solarCompany/reducer';
 import {
@@ -24,14 +24,9 @@ function Calculate() {
   const step = useSelector(state => getStep(state));
   const progress = step === CALCULATE1 ? 66 : 100;
 
-  const [avgBill, setAvgBill] = useState(userData.avgBill)
-  const handleChange = event => setAvgBill(event.target.value);
-
   const dispatch = useDispatch();
-  const handleCalculate = () => {
-    dispatch(setUserData({ ...userData, avgBill }));
-    dispatch(setStep(CALCULATE2));
-  };
+  const handleChange = event => dispatch(setUserData({ ...userData, avgBill: event.target.value }));
+  const handleCalculate = () => dispatch(setStep(CALCULATE2));
 
 
   const stellaMessages = getStellaMessages(step).map((message, i) => (
@@ -42,7 +37,7 @@ function Calculate() {
 
   const avgBillInput = step === CALCULATE1 && (
     <RangeSlider 
-      sliderValue={avgBill} 
+      sliderValue={userData.avgBill} 
       minValue='0' maxValue='1000'
       stepValue='10'
       handleChange={handleChange} />
