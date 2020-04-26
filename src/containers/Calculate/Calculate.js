@@ -56,10 +56,15 @@ function Calculate() {
       isDisplayed={step === CALCULATE1} />
   );
 
+  const headerProps = step === CALCULATE1 && ({
+    showStartOver: true,
+    handleStartOver: handleBack,
+  });
+
 
   return (
     <div className='Calculate'>
-      <Header showStartOver={true} handlePhone={() => 0} />
+      <Header { ...headerProps } handlePhone={() => 0} />
       <ProgressBar now={progress} />
       {stellaMessages}
       {avgBillInput}

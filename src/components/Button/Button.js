@@ -7,10 +7,9 @@ function Button({ action, color, text, image, width, height }) {
     width: `${width || '100%'}`, 
     height: `${height || '1em'}` 
   };
-  const colorClass = (color === 'white') ? 'ButtonWhite' : 'ButtonBlack';
   return (
     <button 
-      className={colorClass} 
+      className={`StellaButton ${color}`} 
       onClick={action}
       style={propsToStyle} 
       id='button' 
@@ -23,8 +22,12 @@ function Button({ action, color, text, image, width, height }) {
   );
 }
 
+Button.defaultProps = {
+  color: 'black',
+}
+
 Button.propTypes = {
-  color: PropTypes.oneOf(['white', 'black']),
+  color: PropTypes.oneOf(['white', 'black', 'clear']).isRequired,
   text: PropTypes.string.isRequired,
   image: PropTypes.string,
   width: PropTypes.string,
