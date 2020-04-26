@@ -1,13 +1,16 @@
-import axios from 'axios';
-
-const request = async (method, url, headers, data) => {
-  const res = await axios({
+const request = (method, url, headers, body) => {
+  return fetch(url, {
     method,
-    url,
-    headers,
-    data
-  });
-  return res;
+    headers: {
+      'Content-Type': 'application/json',
+      ...headers
+    },
+    body: body && JSON.stringify(body)
+  })
+    .then(res => {
+      if(!res.ok) res.error = `Unable to fetch from ${url}`;
+      return res;
+    });
 };
 
 export const post = (url, headers = {}, body) => request('POST', url, headers, body);
