@@ -19,3 +19,12 @@ const SOLARCOMPANIES_URL = 'https://cors-anywhere.herokuapp.com/https://stella-d
 export const getSolarCompany = (appUrl2 = '') => {
   return get(SOLARCOMPANIES_URL, { ...header, 'APP-URL-2': appUrl2 });
 };
+
+
+/* Sample Code:
+
+getSolarCompany('https://somedomain.com')
+  .then(({ data }) => console.log(data))
+  .catch(error => console.log(error));
+
+*/
