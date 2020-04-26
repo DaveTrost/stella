@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
+import { getStyleSkin } from '../../store/solarCompany/reducer';
 import {
     getUserData,
-    getSolarCoSkin,
     getUserStep,
     CALCULATE1
-} from '../../store/calculate/reducer';
-import { setUserData } from '../../store/calculate/actions';
+} from '../../store/userProgress/reducer';
+import { setUserData } from '../../store/userProgress/actions';
 import Header from '../../components/Header/Header';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import { getStellaMessages } from './stellaMessages';
@@ -18,7 +18,7 @@ import Footer from '../../components/Footer/Footer';
 import './Calculate.scss';
 
 function Calculate() {
-  const solarCoSkin = useSelector(state => getSolarCoSkin(state));
+  const styleSkin = useSelector(state => getStyleSkin(state));
   const userData = useSelector(state => getUserData(state));
   const step = useSelector(state => getUserStep(state));
   const progress = step === CALCULATE1 ? 66 : 100;
@@ -31,7 +31,7 @@ function Calculate() {
 
 
   const stellaMessages = getStellaMessages(step).map((message, i) => (
-    <StellaSez key={i} avatar={solarCoSkin.avatar}>
+    <StellaSez key={i} avatar={styleSkin.avatar}>
       <Message text={message} />
     </StellaSez>
   ));

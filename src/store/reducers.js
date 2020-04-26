@@ -1,5 +1,4 @@
-import calculate from './calculate/reducer';
+import solarCompany from './solarCompany/reducer';
+import userProgress from './userProgress/reducer';
 
-export {
-  calculate
-};
+export { solarCompany, userProgress };

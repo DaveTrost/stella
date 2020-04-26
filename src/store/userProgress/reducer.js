@@ -9,9 +9,6 @@ const initialState = Immutable({
   userData: {
     avgBill: '250',
   },
-  solarCoSkin: {
-    avatar: 'https://stella-dev.demand-iq.com/media/avatars/65.jpg',
-  },
 });
 
 export default function reduce(state = initialState, action = {}) {
@@ -25,6 +22,5 @@ export default function reduce(state = initialState, action = {}) {
 
 // selectors
 
-export const getUserStep = state => state.calculate.userStep;
-export const getUserData = state => state.calculate.userData;
-export const getSolarCoSkin = state => state.calculate.solarCoSkin;
+export const getUserStep = state => state.userProgress.userStep;
+export const getUserData = state => state.userProgress.userData;

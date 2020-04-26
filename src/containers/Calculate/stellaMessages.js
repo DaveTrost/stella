@@ -1,4 +1,4 @@
-import { CALCULATE1, CALCULATE2 } from '../../store/calculate/reducer';
+import { CALCULATE1, CALCULATE2 } from '../../store/userProgress/reducer';
 
 const messageLookup = {
   [CALCULATE1]: [
