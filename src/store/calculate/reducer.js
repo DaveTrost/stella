@@ -18,12 +18,5 @@ export default function reduce(state = initialState, action = {}) {
 
 // selectors
 
-export function getSolarCoSkin(state) {
-  return state.calculate.solarCoSkin;
-}
-
-export function getUserData(state) {
-  console.log(state);
-  
-  return state.calculate.userData;
-}
+export const getSolarCoSkin = state => state.calculate.solarCoSkin;
+export const getUserData = state => state.calculate.userData;
