@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
     getUserData,
     getSolarCoSkin,
-    getUserProgress,
     getUserStep,
     CALCULATE1
 } from '../../store/calculate/reducer';
@@ -21,8 +20,8 @@ import './Calculate.scss';
 function Calculate() {
   const solarCoSkin = useSelector(state => getSolarCoSkin(state));
   const userData = useSelector(state => getUserData(state));
-  const progress = useSelector(state => getUserProgress(state));
   const step = useSelector(state => getUserStep(state));
+  const progress = step === CALCULATE1 ? 66 : 100;
 
   const [avgBill, setAvgBill] = useState(userData.avgBill)
   const handleChange = event => setAvgBill(event.target.value);

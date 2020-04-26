@@ -6,7 +6,6 @@ export const CALCULATE2 = '/calculate3';
 
 const initialState = Immutable({
   userStep: CALCULATE1,
-  userProgress: 66,
   userData: {
     avgBill: '250',
   },
@@ -27,6 +26,5 @@ export default function reduce(state = initialState, action = {}) {
 // selectors
 
 export const getUserStep = state => state.calculate.userStep;
-export const getUserProgress = state => state.calculate.userProgress;
 export const getUserData = state => state.calculate.userData;
 export const getSolarCoSkin = state => state.calculate.solarCoSkin;
