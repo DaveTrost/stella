@@ -1,6 +1,7 @@
-import { CALCULATE1, CALCULATE2 } from '../../store/userProgress/reducer';
+import { CALCULATE1, CALCULATE2, UNKNOWN } from '../../store/userProgress/reducer';
 
 const messageLookup = {
+  [UNKNOWN]: [],
   [CALCULATE1]: [
     `Almost done! I just need your most recent 
     monthly electric bill to calculate your savings`,

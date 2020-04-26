@@ -1,11 +1,13 @@
 import Immutable from 'seamless-immutable';
 import { SET_USER_DATA, SET_STEP, RESET_USER_DATA } from './actions';
 
+export const UNKNOWN = '';
 export const CALCULATE1 = '/calculate2';
 export const CALCULATE2 = '/calculate3';
 
 const initialState = Immutable({
-  step: CALCULATE1,
+  loading: true,
+  step: UNKNOWN,
   userData: {
     avgBill: '250',
   },
@@ -26,5 +28,6 @@ export default function reduce(state = initialState, action = {}) {
 
 // selectors
 
+export const getUserDataLoading = state => state.userProgress.loading;
 export const getStep = state => state.userProgress.step;
 export const getUserData = state => state.userProgress.userData;

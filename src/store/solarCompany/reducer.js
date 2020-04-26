@@ -1,8 +1,9 @@
 import Immutable from 'seamless-immutable';
 
 const initialState = Immutable({
+  loading: true,
   styleSkin: {
-    avatar: 'https://stella-dev.demand-iq.com/media/avatars/65.jpg',
+    avatar: '',
   },
 });
 
@@ -15,4 +16,5 @@ export default function reduce(state = initialState, action = {}) {
 
 // selectors
 
+export const getSolarCoLoading = state => state.solarCompany.loading;
 export const getStyleSkin = state => state.solarCompany.styleSkin;
