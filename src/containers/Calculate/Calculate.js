@@ -7,7 +7,7 @@ import {
     CALCULATE1,
     CALCULATE2
 } from '../../store/userProgress/reducer';
-import { setUserData, setStep } from '../../store/userProgress/actions';
+import { setUserData, setStep, resetUserData } from '../../store/userProgress/actions';
 import Header from '../../components/Header/Header';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import { getStellaMessages } from './stellaMessages';
@@ -27,7 +27,7 @@ function Calculate() {
   const dispatch = useDispatch();
   const handleChange = event => dispatch(setUserData({ ...userData, avgBill: event.target.value }));
   const handleCalculate = () => dispatch(setStep(CALCULATE2));
-
+  const handleBack = () => dispatch(resetUserData());
 
   const stellaMessages = getStellaMessages(step).map((message, i) => (
     <StellaSez key={i} avatar={styleSkin.avatar}>
@@ -47,8 +47,8 @@ function Calculate() {
     <ActionBar 
       actionText='Calculate Savings' 
       handleAction={handleCalculate} 
-      handleBack={handleCalculate} 
-      isDisplayed={step === CALCULATE1} />
+      handleBack={handleBack} 
+      isDisplayed={step === CALCULATE1 /*|| 1*/} />
   );
 
   const headerProps = step === CALCULATE1 && ({
