@@ -6,7 +6,7 @@ import startOver from '../../assets/startOver.png';
 import phoneImg from '../../assets/Phone.png';
 import './Header.scss';
 
-function Header({ showStartOver }) {
+function Header({ showStartOver, handlePhone }) {
   return (
     <header className='Header'>
       <div className='stellaLogo'>
@@ -17,6 +17,7 @@ function Header({ showStartOver }) {
       </div>
       <div className='stellaPhone'>
         <Button
+          action={handlePhone}
           text='888-781-7074' 
           image={phoneImg} 
           width='147px'
@@ -29,6 +30,7 @@ function Header({ showStartOver }) {
 
 Header.propTypes = {
   showStartOver: PropTypes.bool,
+  handlePhone: PropTypes.func.isRequired,
 };
 
 export default Header;
