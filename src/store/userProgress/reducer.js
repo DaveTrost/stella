@@ -1,11 +1,11 @@
 import Immutable from 'seamless-immutable';
-import { SET_USER_DATA } from './actions';
+import { SET_USER_DATA, SET_STEP } from './actions';
 
 export const CALCULATE1 = '/calculate2';
 export const CALCULATE2 = '/calculate3';
 
 const initialState = Immutable({
-  userStep: CALCULATE1,
+  step: CALCULATE1,
   userData: {
     avgBill: '250',
   },
@@ -15,6 +15,8 @@ export default function reduce(state = initialState, action = {}) {
   switch (action.type) {
     case SET_USER_DATA:
       return state.merge({userData: action.payload});
+    case SET_STEP:
+      return state.merge({step: action.payload});
     default:
       return state;
   }
@@ -22,5 +24,5 @@ export default function reduce(state = initialState, action = {}) {
 
 // selectors
 
-export const getUserStep = state => state.userProgress.userStep;
+export const getStep = state => state.userProgress.step;
 export const getUserData = state => state.userProgress.userData;

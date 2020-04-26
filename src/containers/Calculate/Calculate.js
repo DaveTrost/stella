@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { getStyleSkin } from '../../store/solarCompany/reducer';
 import {
     getUserData,
-    getUserStep,
-    CALCULATE1
+    getStep,
+    CALCULATE1,
+    CALCULATE2
 } from '../../store/userProgress/reducer';
-import { setUserData } from '../../store/userProgress/actions';
+import { setUserData, setStep } from '../../store/userProgress/actions';
 import Header from '../../components/Header/Header';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import { getStellaMessages } from './stellaMessages';
@@ -20,14 +21,17 @@ import './Calculate.scss';
 function Calculate() {
   const styleSkin = useSelector(state => getStyleSkin(state));
   const userData = useSelector(state => getUserData(state));
-  const step = useSelector(state => getUserStep(state));
+  const step = useSelector(state => getStep(state));
   const progress = step === CALCULATE1 ? 66 : 100;
 
   const [avgBill, setAvgBill] = useState(userData.avgBill)
   const handleChange = event => setAvgBill(event.target.value);
 
   const dispatch = useDispatch();
-  const handleCalculate = () => dispatch(setUserData({ ...userData, avgBill }))
+  const handleCalculate = () => {
+    dispatch(setUserData({ ...userData, avgBill }));
+    dispatch(setStep(CALCULATE2));
+  };
 
 
   const stellaMessages = getStellaMessages(step).map((message, i) => (
