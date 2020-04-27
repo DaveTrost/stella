@@ -64,8 +64,8 @@ function Calculate() {
   }, [dispatch, userData, step]);
 
   useEffect(() => {
-    if(step === CALCULATE3) dispatch(fetchSolarCalculations(userData.avg_bill, solarCoData));
-  }, [dispatch, solarCoData, step, userData.avg_bill]);
+    if(step === CALCULATE3) dispatch(fetchSolarCalculations(userData, solarCoData));
+  }, [dispatch, solarCoData, step, userData]);
 
   const displayLoading = solarCoLoading || userDataLoading;
   const { uiStep, stellaMessages } = stepLookup[step];

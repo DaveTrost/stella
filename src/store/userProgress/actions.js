@@ -8,6 +8,7 @@ export const NEW_USER = 'new-user';
 export const CALCULATE1 = '/calculate1';
 export const CALCULATE2 = '/calculate2';
 export const CALCULATE3 = '/calculate3';
+export const CALCULATE4 = '/calculate4';
 export const INITIAL_AVG_BILL = '250';
 export const TEST_ZIP_CODE = '97213';
 
@@ -38,7 +39,7 @@ export const [
 
       const avg_bill = body.avg_bill || INITIAL_AVG_BILL;
       const step = body.step || CALCULATE1;
-      return { ...body, step, avg_bill };
+      return { ...body, step, avg_bill, zip_code: TEST_ZIP_CODE };
     });
 });
 
@@ -84,8 +85,9 @@ export const [
   SOLAR_CALCULATIONS_LOADING,
   SOLAR_CALCULATIONS_DONE,
   SOLAR_CALCULATIONS_REJECTED,
-] = createAction('FETCH_SOLAR_CALCULATIONS', (avg_bill, solarCoData) => {
+] = createAction('FETCH_SOLAR_CALCULATIONS', (userData, solarCoData) => {
 
+  const { zip_code: zipcode, avg_bill } = userData;
   const {
     offset: bill_offset,
     product_apr: financing_rate,
@@ -94,9 +96,8 @@ export const [
   } = solarCoData;
 
   return postCalculation({
-    avg_bill,
+    avg_bill, zipcode,
     bill_offset, financing_rate, financing_term, price_per_w,
-    zipcode: TEST_ZIP_CODE,
   })
     .then(res => {
       if(!res.ok) {
@@ -112,6 +113,12 @@ export const resetUserData = () => ({ type: RESET_USER_DATA });
 export const SET_USER_DATA = 'SET_USER_DATA';
 export const setUserData = payload => ({
   type: SET_USER_DATA,
+  payload: payload,
+});
+
+export const SET_STEP_CALCULATE_2 = 'SET_STEP_CALCULATE_2';
+export const setStepCalculate2 = payload => ({
+  type: SET_STEP_CALCULATE_2,
   payload: payload,
 });
 

@@ -1,6 +1,5 @@
 import Immutable from 'seamless-immutable';
 import {
-    SET_STEP_CALCULATE_2,
     SET_USER_DATA,
     SET_STEP,
     RESET_USER_DATA,
@@ -11,11 +10,17 @@ import {
     FETCH_USER_DATA_REJECTED,
     INIT_USER_DATA_REJECTED,
     LOADING,
-    CALCULATE1,
+    SET_STEP_CALCULATE_2,
     UPDATE_USER_DATA,
     UPDATE_USER_DATA_DONE,
     UPDATE_USER_DATA_REJECTED,
-    CALCULATE3
+    SOLAR_CALCULATIONS_DONE,
+    SOLAR_CALCULATIONS,
+    SOLAR_CALCULATIONS_REJECTED,
+    CALCULATE1,
+    CALCULATE2,
+    CALCULATE3,
+    CALCULATE4,
 } from './actions';
 
 const initialState = Immutable({
@@ -39,6 +44,7 @@ export default function reduce(state = initialState, action = {}) {
     case FETCH_USER_DATA_REJECTED: 
       return state.merge({ error: action.payload });
     case INIT_USER_DATA:
+      //check payload to determine which state to go to
       return state.merge({ step: CALCULATE1 });
     case INIT_USER_DATA_REJECTED:
       return state.merge({ error: action.payload });
@@ -49,6 +55,12 @@ export default function reduce(state = initialState, action = {}) {
     case UPDATE_USER_DATA:
       return state.merge({ userData: action.payload });
     case UPDATE_USER_DATA_REJECTED:
+      return state.merge({ error: action.payload });
+    case SOLAR_CALCULATIONS_DONE:
+      return state.merge({ step: CALCULATE4 })
+    case SOLAR_CALCULATIONS:
+      return state.merge({ userData: action.payload });
+    case SOLAR_CALCULATIONS_REJECTED:
       return state.merge({ error: action.payload });
     case RESET_USER_DATA:
       return initialState;
