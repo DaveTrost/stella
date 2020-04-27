@@ -1,15 +1,19 @@
 import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Calculate from './containers/Calculate/Calculate';
 import Result from './containers/Result/Result';
 import './App.scss';
 
-const testState = 3;
-
 function App() {
   return (
     <div className="App">
-      {testState === 1 && <Calculate /> }
-      {testState === 3 && <Result /> }
+      <Router>
+        <Switch>
+          <Route exact path='/' component={Calculate} />
+          <Route path='/calculate' component={Calculate} />
+          <Route path='/result' component={Result} />
+        </Switch>
+      </Router>
     </div>
   );
 }
