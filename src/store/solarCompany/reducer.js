@@ -22,6 +22,7 @@ export default function reduce(state = initialState, action = {}) {
         error: action.payload,
       });
     case FETCH_SOLAR_CO:
+      document.title = action.payload.company_name + ' - Online Estimate';
       return state.merge({
         data: action.payload,
         id: action.payload['chosen_questions'][0]['solar_company'],

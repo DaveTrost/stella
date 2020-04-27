@@ -1,6 +1,6 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-import { useDispatch } from "react-redux";
+import useCalculator from '../useCalculator';
+import { finePrint } from '../lookupObjects';
 import Header from '../../components/Header/Header';
 import StellaSez from '../../components/StellaSez/StellaSez';
 import Message from '../../components/StellaSez/Message';
@@ -8,21 +8,21 @@ import InfoScroller from '../InfoScroller/InfoScroller';
 import ActionBar from '../../components/ActionBar/ActionBar';
 import Footer from '../../components/Footer/Footer';
 import './Result.scss';
-import { updateUserDataToApi, CALCULATE1 } from '../../store/userProgress/actions';
-import { initialState } from '../../store/userProgress/reducer';
 
-const finePrint = `To help you go solar, we need your approval to contact you. 
-  By clicking above, you agree that [Company] may call & text you about 
-  [Company] products at the phone number you entered above, 
-  using pre-recorded messages or an autodialer, even if your number is on a "Do Not Call" list. 
-  Msg & data rates may apply to text messages. Consent for calls & texts is optional. 
-  You can opt-out anytime.`;
-const avatar = 'https://stella-dev.demand-iq.com/media/avatars/65.jpg';
-const results = [
+
+const buildResults = (userData, { product_term }) => {
+  const { 
+    savings, 
+    co2_tons, 
+    install_size_min, install_size_max, 
+    panels_min, panels_max
+  } = userData
+  const savingsDisplay = (Math.round(savings)).toLocaleString('en');
+  return ([
   {
     headerText: 'Approximate Lifetime Savings',
-    text: '$63,500',
-    subText: 'Over 25 years',
+    text: '$' + savingsDisplay,
+    subText: `Over ${product_term} years`,
   },
   {
     headerText: 'Increase in Home Value',
@@ -31,39 +31,57 @@ const results = [
   },
   {
     headerText: 'Environmental Impact',
-    text: '500',
+    text: `${co2_tons}`,
     subText: 'Tons of CO2 avoided',
   },
   {
     headerText: 'Recommended System',
-    // text: '10-12 <sub>kW</sub>',
-    text: '10-12 kW',
-    subText: '(33-40 panels)',
+    text: `${install_size_min}-${install_size_max} kW`,
+    subText: `(${panels_min}-${panels_max} panels)`,
   },
-];
+]);
+}
+
 
 function Result() {
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const handleBack = () => {
-    dispatch(updateUserDataToApi({ ...initialState.userData, step: CALCULATE1 }));
-    history.push('/calculate');
-  };
-  const handlePricing = () => 0;
+  const {
+    handlePricing, 
+    handleBack,
+    solarCoData,
+    userData,
+    stellaMessages,
+    showStartOver,
+    showActionBar,
+  } = useCalculator();
+
+  const results = buildResults(userData, solarCoData);
+
+  const stellaMessageItems = stellaMessages.map((message, i) => {
+    const [messagePart, showInfoScroller] = message.split('+');
+    return (
+      <StellaSez key={i} avatar={solarCoData.ai_avatar}>
+        <Message text={messagePart} />
+        {showInfoScroller &&
+          <InfoScroller items={results} />
+        }
+      </StellaSez>
+    );
+  });
 
   return (
     <div className='Result'>
-      <Header showStartOver={true} handleStartOver={handleBack} handlePhone={() => 0} />
-      <StellaSez avatar={avatar}>
-        <Message text={`Check out these savings!`} />
-        <InfoScroller items={results} />
-      </StellaSez>
-      <StellaSez avatar={avatar}>
-        <Message text={`
-          Let me know when you're ready to see pricing!
-        `} />
-      </StellaSez>
-      <ActionBar actionText={`I'm ready!`} handleAction={handlePricing} handleBack={handleBack} smallText={finePrint} isDisplayed={true} />
+      <Header 
+        showStartOver={showStartOver} 
+        handleStartOver={handleBack} 
+        handlePhone={() => 0} />
+      {stellaMessageItems}
+      <ActionBar 
+        actionText={`I'm Ready`} 
+        handleAction={handlePricing} 
+        handleBack={handleBack} 
+        isDisplayed={showActionBar}
+        smallText={finePrint} 
+        />
       <Footer />
     </div>
   );
