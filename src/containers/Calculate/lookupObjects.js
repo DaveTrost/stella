@@ -19,7 +19,7 @@ export const stepLookup = {
   [CALCULATE2]: { uiStep: CALCULATE2, stellaMessages: [msg2] },
   [CALCULATE3]: { uiStep: CALCULATE2, stellaMessages: [msg2, msg3] },
   [CALCULATE4]: { uiStep: CALCULATE2, stellaMessages: [msg2, msg3, msg4] },
-  [RESULT1]: { uiStep: CALCULATE2, stellaMessages: ['results page coming next'] },
+  [RESULT1]: { uiStep: RESULT1, stellaMessages: ['results page coming next'] },
 };
 
 export const uiStepLookup = {
@@ -39,6 +39,12 @@ export const uiStepLookup = {
     progress: 100, 
     showStartOver: false, 
     showProgressBar: true, showRangeSlider: false, 
+    showActionBar: false, invisibleActionBar: true 
+  },
+  [RESULT1]: { 
+    progress: 100, 
+    showStartOver: true, 
+    showProgressBar: false, showRangeSlider: false, 
     showActionBar: false, invisibleActionBar: true 
   },
 };
