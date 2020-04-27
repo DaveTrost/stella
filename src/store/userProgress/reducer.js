@@ -7,7 +7,6 @@ import {
   INIT_USER_DATA,
   FETCH_USER_DATA_REJECTED,
   INIT_USER_DATA_REJECTED,
-  SET_STEP_CALCULATE_2,
   UPDATE_USER_DATA,
   UPDATE_USER_DATA_LOADING,
   UPDATE_USER_DATA_DONE,
@@ -18,11 +17,11 @@ import {
   SOLAR_CALCULATIONS_REJECTED,
   LOADING,
   CALCULATE1,
-  CALCULATE2,
   CALCULATE3,
   CALCULATE4,
   RESULT1,
   INITIAL_AVG_BILL,
+  SET_STEP,
 } from './actions';
 
 export const initialState = Immutable({
@@ -58,8 +57,8 @@ export default function reduce(state = initialState, action = {}) {
       return state.merge({ userData: { ...state.userData, step: CALCULATE1 } });
     case INIT_USER_DATA_REJECTED:
       return state.merge({ error: action.payload });
-    case SET_STEP_CALCULATE_2:
-      return state.merge({ userData: { ...state.userData, step: CALCULATE2 } });
+    case SET_STEP:
+      return state.merge({ userData: { ...state.userData, step: action.payload } });
     case UPDATE_USER_DATA_LOADING:
       return state.merge({ updateLoading: true });
     case UPDATE_USER_DATA_DONE:

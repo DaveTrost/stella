@@ -10,6 +10,8 @@ export const CALCULATE2 = '/calculate2';
 export const CALCULATE3 = '/calculate3';
 export const CALCULATE4 = '/calculate4';
 export const RESULT1 = '/result1';
+export const RESULT2 = '/result2';
+export const END = 'end';
 export const INITIAL_AVG_BILL = '250';
 export const TEST_ZIP_CODE = '97213';
 
@@ -114,8 +116,8 @@ export const setUserData = payload => ({
   payload: payload,
 });
 
-export const SET_STEP_CALCULATE_2 = 'SET_STEP_CALCULATE_2';
-export const setStepCalculate2 = payload => ({
-  type: SET_STEP_CALCULATE_2,
-  payload: payload,
+export const SET_STEP = 'SET_STEP';
+export const setStep = step => ({
+  type: SET_STEP,
+  payload: step,
 });

@@ -8,26 +8,28 @@ import {
 } from '../store/solarCompany/reducer';
 import { fetchSolarCoFromApi } from '../store/solarCompany/actions';
 import {
-    getUserDataLoading,
-    getUserData,
-    getStep,
-    getUserUpdateLoading,
-    getUserCalculateLoading,
-    initialState,
+  getUserDataLoading,
+  getUserData,
+  getStep,
+  getUserUpdateLoading,
+  getUserCalculateLoading,
+  initialState,
 } from '../store/userProgress/reducer';
 import {
     setUserData,
-    setStepCalculate2,
     fetchUserDataFromApi,
     initializeUserDataToApi,
     updateUserDataToApi,
     fetchSolarCalculations,
+    setStep,
     NEW_USER,
     CALCULATE1,
     CALCULATE2,
     CALCULATE3,
     CALCULATE4,
-    RESULT1
+    RESULT1,
+    RESULT2,
+    END,
 } from '../store/userProgress/actions';
 import { stepLookup, uiStepLookup } from './lookupObjects';
 
@@ -43,11 +45,21 @@ function useCalculator() {
   const userData = useSelector(state => getUserData(state));
   const step = useSelector(state => getStep(state));
   const handleChange = event => dispatch(setUserData({ ...userData, avg_bill: event.target.value }));
-  const handleCalculate = () => dispatch(setStepCalculate2());
-  const handleBack = () => {
-    dispatch(updateUserDataToApi({ ...initialState.userData, step: CALCULATE1 }));
-    history.push('/calculate');
-  };
+  const handleCalculate = () => dispatch(setStep(CALCULATE2));
+  const handlePricing = () => dispatch(setStep(END));
+  const handleBack = () => dispatch(updateUserDataToApi({ ...initialState.userData, step: CALCULATE1 }));
+
+  const displayLoading = solarCoLoading || userDataLoading;
+  const { uiStep, stellaMessages } = stepLookup[step];
+  
+  useEffect(() => {
+    const path = ([RESULT1, RESULT2, END].includes(step))
+      ? '/result'
+      : '/calculate';
+    if(path !== window.location.pathname) {
+      history.push(path)
+    }
+  }, [history, step])
 
   useEffect(() => {
     if(solarCoLoading) dispatch(fetchSolarCoFromApi());
@@ -70,17 +82,11 @@ function useCalculator() {
     if(step === CALCULATE3 && ! userCalculateLoading) dispatch(fetchSolarCalculations(userData, solarCoData));
   }, [dispatch, solarCoData, step, userCalculateLoading, userData]);
 
-  useEffect(() => {
-    if(step === RESULT1 && ! userUpdateLoading) history.push('/result');
-  }, [step, userUpdateLoading, history]);
-
-  const displayLoading = solarCoLoading || userDataLoading;
-  const { uiStep, stellaMessages } = stepLookup[step];
-
   return {
     handleChange,
     handleCalculate,
     handleBack,
+    handlePricing,
     displayLoading,
     solarCoLoading,
     userDataLoading,
