@@ -9,7 +9,6 @@ import {
     INIT_USER_DATA,
     FETCH_USER_DATA_REJECTED,
     INIT_USER_DATA_REJECTED,
-    LOADING,
     SET_STEP_CALCULATE_2,
     UPDATE_USER_DATA,
     UPDATE_USER_DATA_LOADING,
@@ -19,19 +18,22 @@ import {
     SOLAR_CALCULATIONS_LOADING,
     SOLAR_CALCULATIONS_DONE,
     SOLAR_CALCULATIONS_REJECTED,
+    LOADING,
+    NEW_USER,
     CALCULATE1,
     CALCULATE2,
     CALCULATE3,
     CALCULATE4,
-    RESULT1
+    RESULT1,
 } from './actions';
 
 const initialState = Immutable({
-  step: LOADING,
   loading: true,
   updateLoading: false,
   calculateLoading: false,
-  userData: {},
+  userData: {
+    step: LOADING,
+  },
   error: '',
 });
 
@@ -42,29 +44,25 @@ export default function reduce(state = initialState, action = {}) {
     case FETCH_USER_DATA_DONE:
       return state.merge({loading: false});
     case FETCH_USER_DATA:
+      const nextStep = action.payload.step || NEW_USER;
       return state.merge({ 
-        userData: action.payload, 
-        step: action.payload.step,
+        userData: { ...state.userData, ...action.payload, step: nextStep } 
       }); 
     case FETCH_USER_DATA_REJECTED: 
       return state.merge({ error: action.payload });
     case INIT_USER_DATA:
-      //check payload to determine which state to go to
-      return state.merge({ step: CALCULATE1 });
+      return state.merge({ userData: { ...state.userData, step: CALCULATE1 } });
     case INIT_USER_DATA_REJECTED:
       return state.merge({ error: action.payload });
     case SET_STEP_CALCULATE_2:
-      return state.merge({ step: CALCULATE2 });
+      return state.merge({ userData: { ...state.userData, step: CALCULATE2 } });
     case UPDATE_USER_DATA_LOADING:
       return state.merge({ updateLoading: true });
     case UPDATE_USER_DATA_DONE:
       return state.merge({ updateLoading: false });
     case UPDATE_USER_DATA:
-      const nextStep = action.payload.savings ? RESULT1 : CALCULATE3;
-      return state.merge({ 
-        step: nextStep,
-        userData: action.payload 
-      });
+      const nextStep2 = action.payload.savings ? RESULT1 : CALCULATE3;
+      return state.merge({ userData: { ...state.userData, ...action.payload, step: nextStep2 } });
     case UPDATE_USER_DATA_REJECTED:
       return state.merge({ error: action.payload });
     case SOLAR_CALCULATIONS_LOADING:
@@ -72,18 +70,15 @@ export default function reduce(state = initialState, action = {}) {
     case SOLAR_CALCULATIONS_DONE:
       return state.merge({ calculateLoading: false });
     case SOLAR_CALCULATIONS:
-      return state.merge({ 
-        step: CALCULATE4,
-        userData: { ...state.userData, ...action.payload } 
-      });
+      return state.merge({ userData: { ...state.userData, ...action.payload, step: CALCULATE4 } });
     case SOLAR_CALCULATIONS_REJECTED:
       return state.merge({ error: action.payload });
     case RESET_USER_DATA:
       return initialState;
     case SET_USER_DATA:
-      return state.merge({userData: action.payload});
+      return state.merge({ userData: { ...state.userData, ...action.payload} });
     case SET_STEP:
-      return state.merge({step: action.payload});
+      return state.merge({ userData: { ...state.userData, step: action.payload } });
     default:
       return state;
   }
@@ -94,5 +89,5 @@ export default function reduce(state = initialState, action = {}) {
 export const getUserDataLoading = state => state.userProgress.loading;
 export const getUserUpdateLoading = state => state.userProgress.updateLoading;
 export const getUserCalculateLoading = state => state.userProgress.calculateLoading;
-export const getStep = state => state.userProgress.step;
+export const getStep = state => state.userProgress.userData.step;
 export const getUserData = state => state.userProgress.userData;
