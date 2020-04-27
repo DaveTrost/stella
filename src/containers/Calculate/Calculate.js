@@ -1,16 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { getStyleSkin } from '../../store/solarCompany/reducer';
+import { 
+  getSolarCoLoading, 
+  getSolarCoData, 
+  getSolarCoId 
+} from '../../store/solarCompany/reducer';
+import { fetchSolarCoFromApi } from '../../store/solarCompany/actions';
 import {
+    getUserDataLoading,
     getUserData,
     getStep,
-    CALCULATE1,
-    CALCULATE2
+    getUserUpdateLoading,
+    getUserCalculateLoading,
+    initialState,
 } from '../../store/userProgress/reducer';
-import { setUserData, setStep, resetUserData } from '../../store/userProgress/actions';
+import {
+    setUserData,
+    setStepCalculate2,
+    fetchUserDataFromApi,
+    initializeUserDataToApi,
+    updateUserDataToApi,
+    fetchSolarCalculations,
+    NEW_USER,
+    CALCULATE1,
+    CALCULATE2,
+    CALCULATE3,
+    CALCULATE4,
+} from '../../store/userProgress/actions';
+import { stepLookup, uiStepLookup } from './lookupObjects';
 import Header from '../../components/Header/Header';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
-import { getStellaMessages } from './stellaMessages';
 import StellaSez from '../../components/StellaSez/StellaSez';
 import Message from '../../components/StellaSez/Message';
 import RangeSlider from '../../components/RangeSlider/RangeSlider';
@@ -18,52 +37,84 @@ import ActionBar from '../../components/ActionBar/ActionBar';
 import Footer from '../../components/Footer/Footer';
 import './Calculate.scss';
 
+
 function Calculate() {
-  const styleSkin = useSelector(state => getStyleSkin(state));
+  const dispatch = useDispatch();
+  const solarCoLoading = useSelector(state => getSolarCoLoading(state));
+  const solarCoData = useSelector(state => getSolarCoData(state));
+  const solarCoId = useSelector(state => getSolarCoId(state));
+  const userDataLoading = useSelector(state => getUserDataLoading(state));
+  const userUpdateLoading = useSelector(state => getUserUpdateLoading(state));
+  const userCalculateLoading = useSelector(state => getUserCalculateLoading(state));
   const userData = useSelector(state => getUserData(state));
   const step = useSelector(state => getStep(state));
-  const progress = step === CALCULATE1 ? 66 : 100;
+  const handleChange = event => dispatch(setUserData({ ...userData, avg_bill: event.target.value }));
+  const handleCalculate = () => dispatch(setStepCalculate2());
+  const handleBack = () => dispatch(updateUserDataToApi({ ...initialState.userData, step: CALCULATE1 }));
 
-  const dispatch = useDispatch();
-  const handleChange = event => dispatch(setUserData({ ...userData, avgBill: event.target.value }));
-  const handleCalculate = () => dispatch(setStep(CALCULATE2));
-  const handleBack = () => dispatch(resetUserData());
 
-  const stellaMessages = getStellaMessages(step).map((message, i) => (
-    <StellaSez key={i} avatar={styleSkin.avatar}>
+  useEffect(() => {
+    if(solarCoLoading) dispatch(fetchSolarCoFromApi());
+  }, [dispatch, solarCoLoading]);
+
+  useEffect(() => {
+      if(userDataLoading) dispatch(fetchUserDataFromApi());
+  }, [dispatch, userDataLoading]);
+
+  useEffect(() => {
+    if(step === NEW_USER && solarCoId) dispatch(initializeUserDataToApi(solarCoId));
+  }, [dispatch, step, solarCoId]);
+
+  useEffect(() => {
+    if(step === CALCULATE2 && !userUpdateLoading) dispatch(updateUserDataToApi(userData));
+    if(step === CALCULATE4 && !userUpdateLoading) dispatch(updateUserDataToApi(userData));
+  }, [dispatch, userData, step, userUpdateLoading]);
+
+  useEffect(() => {
+    if(step === CALCULATE3 && ! userCalculateLoading) dispatch(fetchSolarCalculations(userData, solarCoData));
+  }, [dispatch, solarCoData, step, userCalculateLoading, userData]);
+
+  const displayLoading = solarCoLoading || userDataLoading;
+  const { uiStep, stellaMessages } = stepLookup[step];
+  const { 
+    progress,
+    showStartOver,
+    showProgressBar, showRangeSlider,
+    showActionBar, invisibleActionBar,
+  } = uiStepLookup[uiStep];
+  const stellaMessageItems = stellaMessages.map((message, i) => (
+    <StellaSez key={i} avatar={solarCoData.ai_avatar}>
       <Message text={message} />
     </StellaSez>
   ));
 
-  const avgBillInput = step === CALCULATE1 && (
-    <RangeSlider 
-      sliderValue={userData.avgBill} 
-      minValue='0' maxValue='1000'
-      stepValue='10'
-      handleChange={handleChange} />
-  );
-  
-  const actionBar = (
-    <ActionBar 
-      actionText='Calculate Savings' 
-      handleAction={handleCalculate} 
-      handleBack={handleBack} 
-      isDisplayed={step === CALCULATE1 /*|| 1*/} />
-  );
-
-  const headerProps = step === CALCULATE1 && ({
-    showStartOver: true,
-    handleStartOver: handleBack,
-  });
-
-
   return (
     <div className='Calculate'>
-      <Header { ...headerProps } handlePhone={() => 0} />
-      <ProgressBar now={progress} />
-      {stellaMessages}
-      {avgBillInput}
-      {actionBar}
+      <Header showStartOver={showStartOver} handleStartOver={handleBack} handlePhone={() => 0} />
+      {displayLoading ?
+        <h1>Loading ...</h1>
+      :
+        <>
+          {showProgressBar && 
+            <ProgressBar now={progress} />
+          }
+          {!displayLoading && stellaMessageItems}
+          {showRangeSlider && 
+            <RangeSlider 
+              sliderValue={userData.avg_bill}
+              minValue='0' maxValue='1000'
+              stepValue='10'
+              handleChange={handleChange} />
+          }
+          {showActionBar && 
+            <ActionBar 
+              actionText='Calculate Savings' 
+              handleAction={handleCalculate} 
+              handleBack={handleBack} 
+              isDisplayed={!invisibleActionBar} />
+          }
+        </>
+      }
       <Footer />
     </div>
   );

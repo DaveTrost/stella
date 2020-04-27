@@ -35,7 +35,7 @@ function RangeSlider({ sliderValue, minValue, maxValue, stepValue, handleChange 
 }
 
 RangeSlider.propTypes = {
-  sliderValue: PropTypes.string.isRequired,
+  sliderValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   minValue: PropTypes.string.isRequired,
   maxValue: PropTypes.string.isRequired,
   stepValue: PropTypes.string.isRequired,

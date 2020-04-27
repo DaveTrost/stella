@@ -15,6 +15,10 @@ function StellaSez({ avatar, children }) {
   );
 }
 
+StellaSez.defaultProps = {
+  avatar: '',
+}
+
 StellaSez.propTypes = {
   avatar: PropTypes.string.isRequired,
 };

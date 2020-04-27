@@ -1,24 +1,80 @@
 import Immutable from 'seamless-immutable';
-import { SET_USER_DATA, SET_STEP, RESET_USER_DATA } from './actions';
+import {
+    SET_USER_DATA,
+    FETCH_USER_DATA,
+    FETCH_USER_DATA_LOADING,
+    FETCH_USER_DATA_DONE,
+    INIT_USER_DATA,
+    FETCH_USER_DATA_REJECTED,
+    INIT_USER_DATA_REJECTED,
+    SET_STEP_CALCULATE_2,
+    UPDATE_USER_DATA,
+    UPDATE_USER_DATA_LOADING,
+    UPDATE_USER_DATA_DONE,
+    UPDATE_USER_DATA_REJECTED,
+    SOLAR_CALCULATIONS,
+    SOLAR_CALCULATIONS_LOADING,
+    SOLAR_CALCULATIONS_DONE,
+    SOLAR_CALCULATIONS_REJECTED,
+    LOADING,
+    CALCULATE1,
+    CALCULATE2,
+    CALCULATE4,
+    INITIAL_AVG_BILL
+} from './actions';
+import { nextStepLookup } from '../../containers/Calculate/lookupObjects';
 
-export const CALCULATE1 = '/calculate2';
-export const CALCULATE2 = '/calculate3';
-
-const initialState = Immutable({
-  step: CALCULATE1,
+export const initialState = Immutable({
+  loading: true,
+  updateLoading: false,
+  calculateLoading: false,
   userData: {
-    avgBill: '250',
+    step: LOADING,
+    avg_bill: INITIAL_AVG_BILL,
+    savings: null,
   },
+  error: '',
 });
 
 export default function reduce(state = initialState, action = {}) {
   switch (action.type) {
-    case RESET_USER_DATA:
-      return initialState;
+    case FETCH_USER_DATA_LOADING:
+      return state.merge({loading: true});
+    case FETCH_USER_DATA_DONE:
+      return state.merge({loading: false});
+    case FETCH_USER_DATA:
+      return state.merge({ 
+        userData: { ...state.userData, ...action.payload } 
+      }); 
+    case FETCH_USER_DATA_REJECTED: 
+      return state.merge({ error: action.payload });
+    case INIT_USER_DATA:
+      return state.merge({ userData: { ...state.userData, step: CALCULATE1 } });
+    case INIT_USER_DATA_REJECTED:
+      return state.merge({ error: action.payload });
+    case SET_STEP_CALCULATE_2:
+      return state.merge({ userData: { ...state.userData, step: CALCULATE2 } });
+    case UPDATE_USER_DATA_LOADING:
+      return state.merge({ updateLoading: true });
+    case UPDATE_USER_DATA_DONE:
+      const reloadState = (state.userData.step === LOADING) 
+        ? { loading: true, userData: { ...state.userData, step: CALCULATE1 } }
+        : {};
+      return state.merge({ updateLoading: false, ...reloadState });
+    case UPDATE_USER_DATA:
+      return state.merge({ userData: { ...state.userData, ...action.payload, step: nextStepLookup(action.payload) } });
+    case UPDATE_USER_DATA_REJECTED:
+      return state.merge({ error: action.payload });
+    case SOLAR_CALCULATIONS_LOADING:
+      return state.merge({ calculateLoading: true });
+    case SOLAR_CALCULATIONS_DONE:
+      return state.merge({ calculateLoading: false });
+    case SOLAR_CALCULATIONS:
+      return state.merge({ userData: { ...state.userData, ...action.payload, step: CALCULATE4 } });
+    case SOLAR_CALCULATIONS_REJECTED:
+      return state.merge({ error: action.payload });
     case SET_USER_DATA:
-      return state.merge({userData: action.payload});
-    case SET_STEP:
-      return state.merge({step: action.payload});
+      return state.merge({ userData: { ...state.userData, ...action.payload} });
     default:
       return state;
   }
@@ -26,5 +82,8 @@ export default function reduce(state = initialState, action = {}) {
 
 // selectors
 
-export const getStep = state => state.userProgress.step;
+export const getUserDataLoading = state => state.userProgress.loading;
+export const getUserUpdateLoading = state => state.userProgress.updateLoading;
+export const getUserCalculateLoading = state => state.userProgress.calculateLoading;
+export const getStep = state => state.userProgress.userData.step;
 export const getUserData = state => state.userProgress.userData;
