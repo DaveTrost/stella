@@ -1,7 +1,7 @@
 # Demand-IQ Online Solar Estimate
 
-Affectionately named for it's avatar, Stella.
-
+(Affectionately named for it's avatar, Stella)<br />
+You can run this project from it's deployment at https://solar-for-the-win.netlify.app, or you can build it according to the details below.
 
 ## Running the Project
 
@@ -20,11 +20,19 @@ Builds the app for production to the `build` folder.<br />
 
 ### Redux and Custom Hooks
 
+I love React hooks. They make my code more readable and allow for (IMHO) really good code phrasing. I also use the hook implementation to integrate Redux. I took a shotgun approach at first to get the logic handling to work across the whole app. And it was very ugly all in a single bloated file. That's where the custom hooks come in. I put all the logic into a custom hook and I feel this did a good job of separating concerns between component hierarchy and display/business logic.
+
 ### no CSS frameworks
+
+This project strikes me as an opportunity to do things simply. I took advantage of that. I write (I think) just the essential CSS to achieve a look and function. I hope I did not read the intent of the project poorly. I can't decide if the decision to forego frameworks helped or hindered. On the one hand, the horizontal scrolling element that I ran out of time to implement is a built-in component for some CSS frameworks. On the other hand, it can be very time-consuming to cleanly override the default CSS properties in a framework - especially while targeting a specific Figma design look.
+
+### the blank screen at the end
+
+I wasn't sure how to best handle the "I'm ready" button at the end of the flow. I decided to make it go to a blank screen. This (of course) represents the wide open world of opportunities available to the user. Sarcasm aside, I want it to be clear this was an intentional move.
 
 ### promise-middleware-redux
 
-### seamless-immutable
+I love this library. The developer was an instructor of mine. The library does one thing very well: loading/done/rejected states for API requests. Check it out!= and let me know what you think!
 
 ## To-Do List
 
