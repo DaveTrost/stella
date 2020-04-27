@@ -1,10 +1,7 @@
 const request = (method, url, headers, body, credentials = 'same-origin') => {
   return fetch(url, {
     method,
-    headers: {
-      'Content-Type': 'application/json',
-      ...headers
-    },
+    headers,
     credentials,
     body: body && JSON.stringify(body),
   })

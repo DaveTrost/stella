@@ -5,6 +5,7 @@ import { get, post, patch } from '../request';
 const BASE_URL = 'https://stella-dev.demand-iq.com/api/';
 
 const header = {
+  'Content-Type': 'application/json',
   'APP-URL': 'https://estimate.sunlytix.com/',
 };
 
