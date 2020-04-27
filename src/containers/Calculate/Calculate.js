@@ -7,9 +7,11 @@ import {
 } from '../../store/solarCompany/reducer';
 import { fetchSolarCoFromApi } from '../../store/solarCompany/actions';
 import {
-  getUserDataLoading,
-  getUserData,
-  getStep,
+    getUserDataLoading,
+    getUserData,
+    getStep,
+    getUserUpdateLoading,
+    getUserCalculateLoading
 } from '../../store/userProgress/reducer';
 import {
     setUserData,
@@ -40,6 +42,8 @@ function Calculate() {
   const solarCoData = useSelector(state => getSolarCoData(state));
   const solarCoId = useSelector(state => getSolarCoId(state));
   const userDataLoading = useSelector(state => getUserDataLoading(state));
+  const userUpdateLoading = useSelector(state => getUserUpdateLoading(state));
+  const userCalculateLoading = useSelector(state => getUserCalculateLoading(state));
   const userData = useSelector(state => getUserData(state));
   const step = useSelector(state => getStep(state));
   const handleChange = event => dispatch(setUserData({ ...userData, avg_bill: event.target.value }));
@@ -60,12 +64,12 @@ function Calculate() {
   }, [dispatch, step, solarCoId]);
 
   useEffect(() => {
-    if(step === CALCULATE2) dispatch(updateUserDataToApi(userData));
-  }, [dispatch, userData, step]);
+    if(step === CALCULATE2 && !userUpdateLoading) dispatch(updateUserDataToApi(userData));
+  }, [dispatch, userData, step, userUpdateLoading]);
 
   useEffect(() => {
-    if(step === CALCULATE3) dispatch(fetchSolarCalculations(userData, solarCoData));
-  }, [dispatch, solarCoData, step, userData]);
+    if(step === CALCULATE3 && ! userCalculateLoading) dispatch(fetchSolarCalculations(userData, solarCoData));
+  }, [dispatch, solarCoData, step, userCalculateLoading, userData]);
 
   const displayLoading = solarCoLoading || userDataLoading;
   const { uiStep, stellaMessages } = stepLookup[step];
