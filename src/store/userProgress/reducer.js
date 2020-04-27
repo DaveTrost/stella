@@ -1,27 +1,23 @@
 import Immutable from 'seamless-immutable';
-import { 
-  SET_USER_DATA, 
-  SET_STEP, 
-  RESET_USER_DATA, 
-  FETCH_USER_DATA, 
-  FETCH_USER_DATA_LOADING, 
-  FETCH_USER_DATA_DONE, 
+import {
+  SET_USER_DATA,
+  SET_STEP,
+  RESET_USER_DATA,
+  FETCH_USER_DATA,
+  FETCH_USER_DATA_LOADING,
+  FETCH_USER_DATA_DONE,
   INIT_USER_DATA,
   FETCH_USER_DATA_REJECTED,
-  INIT_USER_DATA_REJECTED
+  INIT_USER_DATA_REJECTED,
+  LOADING,
+  CALCULATE1,
 } from './actions';
 
-export const UNKNOWN = '';
-export const NEW_USER = 'new-user';
-export const CALCULATE1 = '/calculate1';
-export const CALCULATE2 = '/calculate2';
-export const INITIAL_AVG_BILL = '250';
-
 const initialState = Immutable({
+  step: LOADING,
   loading: true,
-  error: '',
-  step: UNKNOWN,
   userData: {},
+  error: '',
 });
 
 export default function reduce(state = initialState, action = {}) {

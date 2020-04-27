@@ -1,7 +1,13 @@
 import { createAction } from 'promise-middleware-redux';
 import { getProgress, postProgress } from '../../services/demand-iq/demandIqApi';
 import { getTopUrl } from '../../utils/getTopUrl';
-import { NEW_USER, INITIAL_AVG_BILL, CALCULATE1 } from './reducer';
+
+export const LOADING = 'loading';
+export const NEW_USER = 'new-user';
+export const CALCULATE1 = '/calculate1';
+export const CALCULATE2 = '/calculate2';
+export const CALCULATE3 = '/calculate3';
+export const INITIAL_AVG_BILL = '250';
 
 export const [
   fetchUserDataFromApi,
