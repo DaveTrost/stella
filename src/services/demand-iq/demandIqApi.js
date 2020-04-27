@@ -11,13 +11,13 @@ const header = {
 
 const PROGRESSES_URL = `${BASE_URL}progresses/me/`;
 export const getProgress = () => {
-  return get(PROGRESSES_URL, header);
+  return get(PROGRESSES_URL, header, 'include');
 };
 export const postProgress = body => {
-  return post(PROGRESSES_URL, header, body);
+  return post(PROGRESSES_URL, header, body, 'include');
 };
-export const patchProgress = (appUrl2, body) => {
-  return patch(PROGRESSES_URL, { ...header, 'APP-URL-2': appUrl2 }, body);
+export const patchProgress = body => {
+  return patch(PROGRESSES_URL, header, body, 'include');
 };
 
 const SOLARCOMPANIES_URL = `${BASE_URL}solarcompanies/me/`;

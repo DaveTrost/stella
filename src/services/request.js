@@ -1,11 +1,11 @@
-const request = (method, url, headers, body) => {
+const request = (method, url, headers, body, credentials = 'same-origin') => {
   return fetch(url, {
     method,
     headers: {
       'Content-Type': 'application/json',
       ...headers
     },
-    credentials: 'include',
+    credentials,
     body: body && JSON.stringify(body),
   })
     .then(res => {
@@ -14,8 +14,8 @@ const request = (method, url, headers, body) => {
     });
 };
 
-export const post = (url, headers = {}, body) => request('POST', url, headers, body);
-export const get = (url, headers = {}) => request('GET', url, headers);
-export const put = (url, headers = {}, body) => request('PUT', url, headers, body);
-export const patch = (url, headers = {}, body) => request('PATCH', url, headers, body);
-export const del = (url, headers = {}) => request('DELETE', url, headers);
+export const get = (url, headers, credentials) => request('GET', url, headers, null, credentials);
+export const post = (url, headers, body, credentials) => request('POST', url, headers, body, credentials);
+export const put = (url, headers, body, credentials) => request('PUT', url, headers, body, credentials);
+export const patch = (url, headers, body, credentials) => request('PATCH', url, headers, body, credentials);
+export const del = (url, headers, credentials) => request('DELETE', url, headers, null, credentials);
