@@ -10,7 +10,6 @@ export const CALCULATE2 = '/calculate2';
 export const CALCULATE3 = '/calculate3';
 export const CALCULATE4 = '/calculate4';
 export const RESULT1 = '/result1';
-export const RESULT2 = '/result2';
 export const END = 'end';
 export const INITIAL_AVG_BILL = '250';
 export const TEST_ZIP_CODE = '97213';

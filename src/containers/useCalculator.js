@@ -28,7 +28,6 @@ import {
     CALCULATE3,
     CALCULATE4,
     RESULT1,
-    RESULT2,
     END,
 } from '../store/userProgress/actions';
 import { stepLookup, uiStepLookup } from './lookupObjects';
@@ -53,7 +52,7 @@ function useCalculator() {
   const { uiStep, stellaMessages } = stepLookup[step];
   
   useEffect(() => {
-    const path = ([RESULT1, RESULT2, END].includes(step))
+    const path = ([RESULT1, END].includes(step))
       ? '/result'
       : '/calculate';
     if(path !== window.location.pathname) {
