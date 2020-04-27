@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { getStyleSkin, getSolarCoLoading } from '../../store/solarCompany/reducer';
+import { 
+  getSolarCoLoading, 
+  getSolarCoData, 
+  getSolarCoId 
+} from '../../store/solarCompany/reducer';
+import { fetchSolarCoFromApi } from '../../store/solarCompany/actions';
+
+
 import {
   getUserDataLoading,
   getUserData,
@@ -21,7 +28,8 @@ import './Calculate.scss';
 
 function Calculate() {
   const solarCoLoading = useSelector(state => getSolarCoLoading(state));
-  const styleSkin = useSelector(state => getStyleSkin(state));
+  const solarCoData = useSelector(state => getSolarCoData(state));
+  const solarCoId = useSelector(state => getSolarCoId(state));
 
   const userDataLoading = useSelector(state => getUserDataLoading(state));
   const userData = useSelector(state => getUserData(state));
@@ -32,12 +40,18 @@ function Calculate() {
   const handleCalculate = () => dispatch(setStep(CALCULATE2));
   const handleBack = () => dispatch(resetUserData());
 
-  const loading = solarCoLoading || userDataLoading;
+  useEffect(() => {
+    if(!solarCoId) {
+      dispatch(fetchSolarCoFromApi());
+    }
+  }, [dispatch, solarCoId]);
+
+  const displayLoading = solarCoLoading || userDataLoading;
 
   const progress = step === CALCULATE1 ? 66 : 100;
 
   const stellaMessages = getStellaMessages(step).map((message, i) => (
-    <StellaSez key={i} avatar={styleSkin.avatar}>
+    <StellaSez key={i} avatar={solarCoData.avatar}>
       <Message text={message} />
     </StellaSez>
   ));
@@ -67,7 +81,7 @@ function Calculate() {
   return (
     <div className='Calculate'>
       <Header { ...headerProps } handlePhone={() => 0} />
-      {loading ?
+      {displayLoading ?
         <h1>Loading ...</h1>
       :
         <>
