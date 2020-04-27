@@ -36,9 +36,9 @@ export const [
         throw res.error;
       }
 
-      const avgBill = body.avgBill || INITIAL_AVG_BILL;
+      const avg_bill = body.avg_bill || INITIAL_AVG_BILL;
       const step = body.step || CALCULATE1;
-      return { ...body, step, avgBill };
+      return { ...body, step, avg_bill };
     });
 });
 
@@ -54,7 +54,7 @@ export const [
     referring_url: getTopUrl(),
     session_id: 'this-id-does-not-matter-but-it-has-to-exist',
   })
-    .then(res => {      
+    .then(res => {
       if(!res.ok) {
         throw res.error;
       }
@@ -68,7 +68,7 @@ export const [
   SOLAR_CALCULATIONS_LOADING,
   SOLAR_CALCULATIONS_DONE,
   SOLAR_CALCULATIONS_REJECTED,
-] = createAction('FETCH_SOLAR_CALCULATIONS', (avgBill, solarCoData) => {
+] = createAction('FETCH_SOLAR_CALCULATIONS', (avg_bill, solarCoData) => {
 
   const {
     offset: bill_offset,
@@ -78,7 +78,7 @@ export const [
   } = solarCoData;
 
   return postCalculation({
-    avg_bill: avgBill,
+    avg_bill,
     bill_offset, financing_rate, financing_term, price_per_w,
     zipcode: TEST_ZIP_CODE,
   })

@@ -41,7 +41,7 @@ function Calculate() {
   const userDataLoading = useSelector(state => getUserDataLoading(state));
   const userData = useSelector(state => getUserData(state));
   const step = useSelector(state => getStep(state));
-  const handleChange = event => dispatch(setUserData({ ...userData, avgBill: event.target.value }));
+  const handleChange = event => dispatch(setUserData({ ...userData, avg_bill: event.target.value }));
   const handleCalculate = () => dispatch(setStep(CALCULATE2));
   const handleBack = () => dispatch(resetUserData());
 
@@ -55,18 +55,21 @@ function Calculate() {
   }, [dispatch, userDataLoading]);
 
   useEffect(() => {
-    if(step === NEW_USER && solarCoId) {
-      dispatch(initializeUserDataToApi(solarCoId));
-    }
+    if(step === NEW_USER && solarCoId) dispatch(initializeUserDataToApi(solarCoId));
   }, [dispatch, step, solarCoId]);
 
   useEffect(() => {
-    if(step === CALCULATE3) dispatch(fetchSolarCalculations(userData.avgBill, solarCoData));
-  }, [dispatch, solarCoData, step, userData.avgBill]);
+    if(step === CALCULATE3) dispatch(fetchSolarCalculations(userData.avg_bill, solarCoData));
+  }, [dispatch, solarCoData, step, userData.avg_bill]);
 
   const displayLoading = solarCoLoading || userDataLoading;
   const { uiStep, stellaMessages } = stepLookup[step];
-  const { progress, showStartOver, showProgressBar, showRangeSlider, showActionBar, invisibleActionBar } = uiStepLookup[uiStep];
+  const { 
+    progress,
+    showStartOver,
+    showProgressBar, showRangeSlider,
+    showActionBar, invisibleActionBar,
+  } = uiStepLookup[uiStep];
   const stellaMessageItems = stellaMessages.map((message, i) => (
     <StellaSez key={i} avatar={solarCoData.ai_avatar}>
       <Message text={message} />
@@ -86,7 +89,7 @@ function Calculate() {
           {!displayLoading && stellaMessageItems}
           {showRangeSlider && 
             <RangeSlider 
-              sliderValue={userData.avgBill}
+              sliderValue={userData.avg_bill}
               minValue='0' maxValue='1000'
               stepValue='10'
               handleChange={handleChange} />
