@@ -10,11 +10,19 @@ import Footer from '../../components/Footer/Footer';
 import './Result.scss';
 
 
-const results = [
+const buildResults = (userData, { product_term }) => {
+  const { 
+    savings, 
+    co2_tons, 
+    install_size_min, install_size_max, 
+    panels_min, panels_max
+  } = userData
+  const savingsDisplay = (Math.round(savings)).toLocaleString('en');
+  return ([
   {
     headerText: 'Approximate Lifetime Savings',
-    text: '$63,500',
-    subText: 'Over 25 years',
+    text: '$' + savingsDisplay,
+    subText: `Over ${product_term} years`,
   },
   {
     headerText: 'Increase in Home Value',
@@ -23,16 +31,16 @@ const results = [
   },
   {
     headerText: 'Environmental Impact',
-    text: '500',
+    text: `${co2_tons}`,
     subText: 'Tons of CO2 avoided',
   },
   {
     headerText: 'Recommended System',
-    // text: '10-12 <sub>kW</sub>',
-    text: '10-12 kW',
-    subText: '(33-40 panels)',
+    text: `${install_size_min}-${install_size_max} kW`,
+    subText: `(${panels_min}-${panels_max} panels)`,
   },
-];
+]);
+}
 
 
 function Result() {
@@ -40,11 +48,13 @@ function Result() {
     handlePricing, 
     handleBack,
     solarCoData,
-    // userData,
+    userData,
     stellaMessages,
     showStartOver,
     showActionBar,
   } = useCalculator();
+
+  const results = buildResults(userData, solarCoData);
 
   const stellaMessageItems = stellaMessages.map((message, i) => {
     const [messagePart, showInfoScroller] = message.split('+');
