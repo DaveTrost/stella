@@ -38,7 +38,7 @@ export const initialState = Immutable({
 
 export const getNextStep = (userData) => {
   if(userData.step === CALCULATE1) return CALCULATE1;
-  return userData.savings ? RESULT1 : CALCULATE3;
+  return (userData.savings !== null) ? RESULT1 : CALCULATE3;
 }
 
 export default function reduce(state = initialState, action = {}) {
