@@ -7,8 +7,8 @@ export const [
   FETCH_USER_DATA_LOADING,
   FETCH_USER_DATA_DONE,
   FETCH_USER_DATA_REJECTED
-] = createAction('FETCH_USER_DATA', () => {
-  return getProgress('http://localhost:3000')
+] = createAction('FETCH_USER_DATA_FROM_API', () => {
+  return getProgress()
     .then(async (res) => {
       const body = await res.json();
       
