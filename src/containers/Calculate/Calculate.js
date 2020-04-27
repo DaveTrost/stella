@@ -31,6 +31,7 @@ import {
 } from '../../store/userProgress/actions';
 import { stepLookup, uiStepLookup } from './lookupObjects';
 import Header from '../../components/Header/Header';
+import Loading from '../../components/Loading/Loading';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import StellaSez from '../../components/StellaSez/StellaSez';
 import Message from '../../components/StellaSez/Message';
@@ -87,8 +88,9 @@ function Calculate() {
   const { 
     progress,
     showStartOver,
-    showProgressBar, showRangeSlider,
-    showActionBar, invisibleActionBar,
+    showProgressBar, 
+    showRangeSlider,
+    showActionBar,
   } = uiStepLookup[uiStep];
   const stellaMessageItems = stellaMessages.map((message, i) => (
     <StellaSez key={i} avatar={solarCoData.ai_avatar}>
@@ -99,8 +101,9 @@ function Calculate() {
   return (
     <div className='Calculate'>
       <Header showStartOver={showStartOver} handleStartOver={handleBack} handlePhone={() => 0} />
-      {displayLoading ?
-        <h1>Loading ...</h1>
+      {displayLoading 
+      ?
+        <Loading />
       :
         <>
           {showProgressBar && 
@@ -114,15 +117,13 @@ function Calculate() {
               stepValue='10'
               handleChange={handleChange} />
           }
-          {showActionBar && 
-            <ActionBar 
-              actionText='Calculate Savings' 
-              handleAction={handleCalculate} 
-              handleBack={handleBack} 
-              isDisplayed={!invisibleActionBar} />
-          }
         </>
       }
+      <ActionBar 
+        actionText='Calculate Savings' 
+        handleAction={handleCalculate} 
+        handleBack={handleBack} 
+        isDisplayed={showActionBar} />
       <Footer />
     </div>
   );

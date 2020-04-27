@@ -5,7 +5,7 @@ import './ActionBar.scss';
 
 function ActionBar({ actionText, handleAction, handleBack, smallText, isDisplayed }) {
   return (
-    <div className={`ActionBar ${!isDisplayed && 'hidden'}`}>
+    <div className={`ActionBar ${isDisplayed? '' : 'hidden'}`}>
       <div className='buttonRow'>
         {handleBack &&
           <div className='goBack'>
