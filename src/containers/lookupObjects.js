@@ -6,7 +6,6 @@ import {
   CALCULATE3,
   CALCULATE4,
   RESULT1,
-  RESULT2,
   END,
 } from '../store/userProgress/actions';
 
@@ -24,14 +23,12 @@ export const stepLookup = {
   [CALCULATE2]: { uiStep: CALCULATE2, stellaMessages: [msg2] },
   [CALCULATE3]: { uiStep: CALCULATE2, stellaMessages: [msg2, msg3] },
   [CALCULATE4]: { uiStep: CALCULATE2, stellaMessages: [msg2, msg3, msg4] },
-  [RESULT1]: { uiStep: RESULT1, stellaMessages: [msg5] },
-  [RESULT2]: { uiStep: RESULT1, stellaMessages: [msg6] },
+  [RESULT1]: { uiStep: RESULT1, stellaMessages: [msg5, msg6] },
   [END]: { uiStep: END, stellaMessages: [] },
 };
 
 export const uiStepLookup = {
   [LOADING]: { 
-    url: '/calculate',
     progress: 0, 
     showStartOver: false, 
     showProgressBar: false, 
@@ -39,7 +36,6 @@ export const uiStepLookup = {
     showActionBar: false, 
   },
   [CALCULATE1]: { 
-    url: '/calculate',
     progress: 66, 
     showStartOver: true, 
     showProgressBar: true, 
@@ -47,7 +43,6 @@ export const uiStepLookup = {
     showActionBar: true, 
   },
   [CALCULATE2]: { 
-    url: '/calculate',
     progress: 100, 
     showStartOver: false, 
     showProgressBar: true, 
@@ -55,7 +50,6 @@ export const uiStepLookup = {
     showActionBar: false,
   },
   [RESULT1]: { 
-    url: '/result',
     progress: 100, 
     showStartOver: true, 
     showProgressBar: false, 
@@ -63,7 +57,6 @@ export const uiStepLookup = {
     showActionBar: true,
   },
   [END]: { 
-    url: '/result',
     progress: 0, 
     showStartOver: false, 
     showProgressBar: false, 
