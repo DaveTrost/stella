@@ -1,4 +1,4 @@
-.ButtonWhite {
+.StellaButton.white {
   border: 1px solid #000000;
   background: #FFFFFF;
   label {
@@ -6,7 +6,15 @@
   }
 }
 
-.ButtonBlack {
+.StellaButton.clear {
+  border: none;
+  background: transparent;
+  label {
+    color: #000000;
+  }
+}
+
+.StellaButton.black {
   border: none;
   background: #000000;
   label {  
@@ -14,7 +22,7 @@
   } 
 }
 
-.ButtonWhite, .ButtonBlack {
+.StellaButton {
   outline: none;
   border-radius: 3px;
 }
