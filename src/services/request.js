@@ -5,7 +5,8 @@ const request = (method, url, headers, body) => {
       'Content-Type': 'application/json',
       ...headers
     },
-    body: body && JSON.stringify(body)
+    credentials: 'include',
+    body: body && JSON.stringify(body),
   })
     .then(res => {
       if(!res.ok) res.error = `Unable to fetch from ${url}`;
