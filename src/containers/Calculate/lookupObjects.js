@@ -26,26 +26,30 @@ export const uiStepLookup = {
   [LOADING]: { 
     progress: 0, 
     showStartOver: false, 
-    showProgressBar: false, showRangeSlider: false, 
-    showActionBar: false, invisibleActionBar: false 
+    showProgressBar: false, 
+    showRangeSlider: false, 
+    showActionBar: false, 
   },
   [CALCULATE1]: { 
     progress: 66, 
     showStartOver: true, 
-    showProgressBar: true, showRangeSlider: true, 
-    showActionBar: true, invisibleActionBar: false 
+    showProgressBar: true, 
+    showRangeSlider: true, 
+    showActionBar: true, 
   },
   [CALCULATE2]: { 
     progress: 100, 
     showStartOver: false, 
-    showProgressBar: true, showRangeSlider: false, 
-    showActionBar: false, invisibleActionBar: true 
+    showProgressBar: true, 
+    showRangeSlider: false, 
+    showActionBar: false,
   },
   [RESULT1]: { 
     progress: 100, 
     showStartOver: true, 
-    showProgressBar: false, showRangeSlider: false, 
-    showActionBar: false, invisibleActionBar: true 
+    showProgressBar: false, 
+    showRangeSlider: false, 
+    showActionBar: true,
   },
 };
 

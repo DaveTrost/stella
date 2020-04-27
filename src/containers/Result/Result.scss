@@ -1,5 +1,6 @@
 .Result {
   max-width: 770px;
+  width: 100vw;
   margin: auto;
 
   flex-grow: 1;
@@ -8,6 +9,7 @@
   flex-direction: column;
 
   @media only screen and (min-width: 770px) {
+    width: 770px;    
     max-height: 550px;
     background: #FFFFFF;
     border-radius: 5px;

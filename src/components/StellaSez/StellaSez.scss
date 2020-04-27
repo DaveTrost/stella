@@ -5,6 +5,7 @@
   margin-top: 15px;
   margin-left: 20px;
   margin-right: 20px;
+  width: calc(100% - 40px);
 
   .avatar {
     
@@ -20,6 +21,7 @@
 
   .message {
     flex-grow: 1;
+    max-width: calc(100% - 60px);
     background: #F9F9F9;
     border-radius: 20px;
     border-bottom-left-radius: 5px;
