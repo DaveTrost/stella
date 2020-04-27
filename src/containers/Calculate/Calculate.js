@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { 
   getSolarCoLoading, 
@@ -26,6 +27,7 @@ import {
     CALCULATE2,
     CALCULATE3,
     CALCULATE4,
+    RESULT1
 } from '../../store/userProgress/actions';
 import { stepLookup, uiStepLookup } from './lookupObjects';
 import Header from '../../components/Header/Header';
@@ -39,6 +41,7 @@ import './Calculate.scss';
 
 
 function Calculate() {
+  const history = useHistory();
   const dispatch = useDispatch();
   const solarCoLoading = useSelector(state => getSolarCoLoading(state));
   const solarCoData = useSelector(state => getSolarCoData(state));
@@ -73,6 +76,11 @@ function Calculate() {
   useEffect(() => {
     if(step === CALCULATE3 && ! userCalculateLoading) dispatch(fetchSolarCalculations(userData, solarCoData));
   }, [dispatch, solarCoData, step, userCalculateLoading, userData]);
+
+  useEffect(() => {
+    if(step === RESULT1 && ! userUpdateLoading) history.push('/result');
+  }, [step, userUpdateLoading, history]);
+
 
   const displayLoading = solarCoLoading || userDataLoading;
   const { uiStep, stellaMessages } = stepLookup[step];

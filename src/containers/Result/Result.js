@@ -1,4 +1,6 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from "react-redux";
 import Header from '../../components/Header/Header';
 import StellaSez from '../../components/StellaSez/StellaSez';
 import Message from '../../components/StellaSez/Message';
@@ -6,6 +8,8 @@ import InfoScroller from '../InfoScroller/InfoScroller';
 import ActionBar from '../../components/ActionBar/ActionBar';
 import Footer from '../../components/Footer/Footer';
 import './Result.scss';
+import { updateUserDataToApi, CALCULATE1 } from '../../store/userProgress/actions';
+import { initialState } from '../../store/userProgress/reducer';
 
 const finePrint = `To help you go solar, we need your approval to contact you. 
   By clicking above, you agree that [Company] may call & text you about 
@@ -39,9 +43,16 @@ const results = [
 ];
 
 function Result() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const handleBack = () => {
+    dispatch(updateUserDataToApi({ ...initialState.userData, step: CALCULATE1 }));
+    history.push('/calculate');
+  }
+
   return (
     <div className='Result'>
-      <Header showStartOver={true} />
+      <Header showStartOver={true} handleStartOver={handleBack} />
       <StellaSez avatar={avatar}>
         <Message text={`Check out these savings!`} />
         <InfoScroller items={results} />
