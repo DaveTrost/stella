@@ -23,6 +23,7 @@ import {
     CALCULATE2,
     CALCULATE3,
     CALCULATE4,
+    RESULT1
 } from './actions';
 
 const initialState = Immutable({
@@ -59,8 +60,9 @@ export default function reduce(state = initialState, action = {}) {
     case UPDATE_USER_DATA_DONE:
       return state.merge({ updateLoading: false });
     case UPDATE_USER_DATA:
+      const nextStep = action.payload.savings ? RESULT1 : CALCULATE3;
       return state.merge({ 
-        step: CALCULATE3,
+        step: nextStep,
         userData: action.payload 
       });
     case UPDATE_USER_DATA_REJECTED:

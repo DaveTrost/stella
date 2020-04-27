@@ -1,10 +1,11 @@
 import {
-    CALCULATE1,
-    CALCULATE2,
-    NEW_USER,
-    LOADING,
-    CALCULATE3,
-    CALCULATE4,
+  LOADING,
+  NEW_USER,
+  CALCULATE1,
+  CALCULATE2,
+  CALCULATE3,
+  CALCULATE4,
+  RESULT1,
 } from '../../store/userProgress/actions';
 
 const msg1 = `Almost done! I just need your most recent monthly electric bill to calculate your savings`;
@@ -18,6 +19,7 @@ export const stepLookup = {
   [CALCULATE2]: { uiStep: CALCULATE2, stellaMessages: [msg2] },
   [CALCULATE3]: { uiStep: CALCULATE2, stellaMessages: [msg2, msg3] },
   [CALCULATE4]: { uiStep: CALCULATE2, stellaMessages: [msg2, msg3, msg4] },
+  [RESULT1]: { uiStep: CALCULATE2, stellaMessages: ['results page coming next'] },
 };
 
 export const uiStepLookup = {

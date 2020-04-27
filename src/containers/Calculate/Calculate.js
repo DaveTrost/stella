@@ -24,6 +24,7 @@ import {
     NEW_USER,
     CALCULATE2,
     CALCULATE3,
+    CALCULATE4
 } from '../../store/userProgress/actions';
 import { stepLookup, uiStepLookup } from './lookupObjects';
 import Header from '../../components/Header/Header';
@@ -65,6 +66,7 @@ function Calculate() {
 
   useEffect(() => {
     if(step === CALCULATE2 && !userUpdateLoading) dispatch(updateUserDataToApi(userData));
+    if(step === CALCULATE4 && !userUpdateLoading) dispatch(updateUserDataToApi(userData));
   }, [dispatch, userData, step, userUpdateLoading]);
 
   useEffect(() => {
