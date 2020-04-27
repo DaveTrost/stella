@@ -1,5 +1,6 @@
 import { createAction } from 'promise-middleware-redux';
-import { getProgress } from '../../services/demand-iq/demandIqApi';
+import { getProgress, postProgress } from '../../services/demand-iq/demandIqApi';
+import { getTopUrl } from '../../utils/getTopUrl';
 import { NEW_USER, INITIAL_AVG_BILL, CALCULATE1 } from './reducer';
 
 export const [
@@ -30,6 +31,26 @@ export const [
       const avgBill = body.avgBill || INITIAL_AVG_BILL;
       const step = body.step || CALCULATE1;
       return { ...body, step, avgBill };
+    });
+});
+
+export const [
+  initializeUserDataToApi,
+  INIT_USER_DATA,
+  INIT_USER_DATA_LOADING,
+  INIT_USER_DATA_DONE,
+  INIT_USER_DATA_REJECTED
+] = createAction('INIT_USER_DATA_TO_API', solar_company => {
+  return postProgress({
+    solar_company,
+    referring_url: getTopUrl(),
+    session_id: 'this-id-does-not-matter-but-it-has-to-exist',
+  })
+    .then(res => {      
+      if(!res.ok) {
+        throw res.error;
+      }
+      return { step: CALCULATE1 };
     });
 });
 

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { 
   getSolarCoLoading, 
   getSolarCoData, 
+  getSolarCoId 
 } from '../../store/solarCompany/reducer';
 import { fetchSolarCoFromApi } from '../../store/solarCompany/actions';
 import {
@@ -18,6 +19,7 @@ import {
   setStep, 
   resetUserData, 
   fetchUserDataFromApi,
+  initializeUserDataToApi,
 } from '../../store/userProgress/actions';
 import Header from '../../components/Header/Header';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
@@ -32,6 +34,7 @@ import './Calculate.scss';
 function Calculate() {
   const solarCoLoading = useSelector(state => getSolarCoLoading(state));
   const solarCoData = useSelector(state => getSolarCoData(state));
+  const solarCoId = useSelector(state => getSolarCoId(state));
   const userDataLoading = useSelector(state => getUserDataLoading(state));
   const userData = useSelector(state => getUserData(state));
   const step = useSelector(state => getStep(state));
@@ -48,6 +51,12 @@ function Calculate() {
   useEffect(() => {
       if(userDataLoading) dispatch(fetchUserDataFromApi());
   }, [dispatch, userDataLoading]);
+
+  useEffect(() => {
+    if(step === NEW_USER && solarCoId) {
+      dispatch(initializeUserDataToApi(solarCoId));
+    }
+  }, [dispatch, step, solarCoId]);
 
   const displayLoading = solarCoLoading || userDataLoading;
   const uiStep = (step === NEW_USER) ? CALCULATE1 : step;
