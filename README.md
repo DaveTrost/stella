@@ -1,68 +1,45 @@
+# Demand-IQ Online Solar Estimate
+
+Affectionately named for it's avatar, Stella.
+
+
+## Running the Project
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `yarn start`
+### `npm start`
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
+### `npm run build`
 
 Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Project Decisions
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Redux and Custom Hooks
 
-### `yarn eject`
+### no CSS frameworks
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### promise-middleware-redux
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### seamless-immutable
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## To-Do List
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### A sideways scrolling list that matches the Figma
 
-## Learn More
+I needed to focus on functionality, and ran out of time to come back to this item. The current scroll box is CSS only. In order to implement the functionality the Figma shows, it will take some Javascript help. I briefly tried to use the 'react-horizontal-scroller' package to get the functionality faster, but it didn't pan out the way I hoped so I ditched it.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Dynamic styling based on the API response
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+In the current site, there are 2 dynamic elements: the avatar image and the document title. I would need to spend some solid time to go in and implement a readable approach to doing the CSS-in-JS based on the style information that comes from the solarcompanies endpoint. When I do have time, I'm planning to use Emotion and/or styled-components for some syntactic friendliness.
 
-### Code Splitting
+### Fully cross browser styling on the range slider
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+There are several great articles written on this topic (I like a couple of the ones at CSS Tricks: [1](https://css-tricks.com/sliding-nightmare-understanding-range-input/), [2](https://css-tricks.com/styling-cross-browser-compatible-range-inputs-css/)). I'll need more time than I had available to appreciate these articles in depth and apply their tips.
 
-### Analyzing the Bundle Size
+### Appropriate Cursors
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+This is one of my pet peeves - cursors that don't show up as the right (intuitive) shape when hovering over specific elements. Closely related, for me, is text that is selectable but it's on a button or images that are selectable. I ran out of time to finalize these items. Fortunately, it's not going to break the user experience. Unfortunately, it will aggravate me so it won't be long before I'm chomping at the bit to fix it ... I can't decide if that's a good or bad thing!
