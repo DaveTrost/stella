@@ -3,7 +3,7 @@ import Calculate from './containers/Calculate/Calculate';
 import Result from './containers/Result/Result';
 import './App.scss';
 
-const testState = 1;
+const testState = 3;
 
 function App() {
   return (
