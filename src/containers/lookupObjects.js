@@ -6,7 +6,7 @@ import {
   CALCULATE3,
   CALCULATE4,
   RESULT1,
-} from '../../store/userProgress/actions';
+} from '../store/userProgress/actions';
 
 const msg1 = `Almost done! I just need your most recent monthly electric bill to calculate your savings`;
 const msg2 = `Hang on. I am calculating your savings...`;
@@ -52,8 +52,3 @@ export const uiStepLookup = {
     showActionBar: true,
   },
 };
-
-export const nextStepLookup = (userData) => {
-  if(userData.step === CALCULATE1) return CALCULATE1;
-  return userData.savings ? RESULT1 : CALCULATE3;
-}

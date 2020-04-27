@@ -29,9 +29,9 @@ import {
     CALCULATE4,
     RESULT1
 } from '../store/userProgress/actions';
-import { stepLookup, uiStepLookup } from './Calculate/lookupObjects';
+import { stepLookup, uiStepLookup } from './lookupObjects';
 
-export const useCalculator = () => {
+function useCalculator() {
   const history = useHistory();
   const dispatch = useDispatch();
   const solarCoLoading = useSelector(state => getSolarCoLoading(state));
@@ -44,7 +44,10 @@ export const useCalculator = () => {
   const step = useSelector(state => getStep(state));
   const handleChange = event => dispatch(setUserData({ ...userData, avg_bill: event.target.value }));
   const handleCalculate = () => dispatch(setStepCalculate2());
-  const handleBack = () => dispatch(updateUserDataToApi({ ...initialState.userData, step: CALCULATE1 }));
+  const handleBack = () => {
+    dispatch(updateUserDataToApi({ ...initialState.userData, step: CALCULATE1 }));
+    history.push('/calculate');
+  };
 
   useEffect(() => {
     if(solarCoLoading) dispatch(fetchSolarCoFromApi());
@@ -88,3 +91,5 @@ export const useCalculator = () => {
     ...uiStepLookup[uiStep],
   }
 }
+
+export default useCalculator;

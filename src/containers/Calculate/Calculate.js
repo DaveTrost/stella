@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCalculator } from '../useCalculator';
+import useCalculator from '../useCalculator';
 import Header from '../../components/Header/Header';
 import Loading from '../../components/Loading/Loading';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
