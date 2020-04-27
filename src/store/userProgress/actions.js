@@ -1,5 +1,6 @@
 import { createAction } from 'promise-middleware-redux';
 import { getProgress } from '../../services/demand-iq/demandIqApi';
+import { NEW_USER, INITIAL_AVG_BILL, CALCULATE1 } from './reducer';
 
 export const [
   fetchUserDataFromApi,
@@ -8,23 +9,27 @@ export const [
   FETCH_USER_DATA_DONE,
   FETCH_USER_DATA_REJECTED
 ] = createAction('FETCH_USER_DATA_FROM_API', () => {
+  let res;
   return getProgress()
-    .then(async (res) => {
-      const body = await res.json();
-      
+    .then(response => {
+      res = response;
+      return response.json()
+    })
+    .then(body => {
       const isNewUser = /not found/i.test(body.detail);
-      if(!res.ok && isNewUser) {
-        console.log(body);
-        return body;
-      }
+      if(isNewUser) {
+        body.step = NEW_USER;
+      } 
       
-      if(!res.ok) {
+      if(!res.ok && !isNewUser) {
         /* Note: FETCH_USER_DATA_REJECTED is unreachable unless the promise rejects here ...
           see if this can be done later */
         throw res.error;
       }
 
-      return body;
+      const avgBill = body.avgBill || INITIAL_AVG_BILL;
+      const step = body.step || CALCULATE1;
+      return { ...body, step, avgBill };
     });
 });
 
