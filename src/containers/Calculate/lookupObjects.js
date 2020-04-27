@@ -48,3 +48,8 @@ export const uiStepLookup = {
     showActionBar: false, invisibleActionBar: true 
   },
 };
+
+export const nextStepLookup = (userData) => {
+  if(userData.step === CALCULATE1) return CALCULATE1;
+  return userData.savings ? RESULT1 : CALCULATE3;
+}

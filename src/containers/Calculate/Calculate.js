@@ -11,20 +11,21 @@ import {
     getUserData,
     getStep,
     getUserUpdateLoading,
-    getUserCalculateLoading
+    getUserCalculateLoading,
+    initialState,
 } from '../../store/userProgress/reducer';
 import {
     setUserData,
     setStepCalculate2,
-    resetUserData,
     fetchUserDataFromApi,
     initializeUserDataToApi,
     updateUserDataToApi,
     fetchSolarCalculations,
     NEW_USER,
+    CALCULATE1,
     CALCULATE2,
     CALCULATE3,
-    CALCULATE4
+    CALCULATE4,
 } from '../../store/userProgress/actions';
 import { stepLookup, uiStepLookup } from './lookupObjects';
 import Header from '../../components/Header/Header';
@@ -49,7 +50,7 @@ function Calculate() {
   const step = useSelector(state => getStep(state));
   const handleChange = event => dispatch(setUserData({ ...userData, avg_bill: event.target.value }));
   const handleCalculate = () => dispatch(setStepCalculate2());
-  const handleBack = () => dispatch(resetUserData());
+  const handleBack = () => dispatch(updateUserDataToApi({ ...initialState.userData, step: CALCULATE1 }));
 
 
   useEffect(() => {
