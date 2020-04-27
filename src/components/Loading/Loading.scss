@@ -1,7 +1,7 @@
 .Loading {
-  position: fixed;
-  left: 50vw;
-  top: 50vh;
+  position: absolute;
+  left: 50%;
+  top: 50%;
   transform: translate(-50%, -50%);
 
   /* this CSS is courtesy of https://loading.io/css/ */
