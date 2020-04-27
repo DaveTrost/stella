@@ -17,10 +17,11 @@ import {
     resetUserData,
     fetchUserDataFromApi,
     initializeUserDataToApi,
+    updateUserDataToApi,
+    fetchSolarCalculations,
     NEW_USER,
     CALCULATE2,
-    fetchSolarCalculations,
-    CALCULATE3
+    CALCULATE3,
 } from '../../store/userProgress/actions';
 import { stepLookup, uiStepLookup } from './lookupObjects';
 import Header from '../../components/Header/Header';
@@ -57,6 +58,10 @@ function Calculate() {
   useEffect(() => {
     if(step === NEW_USER && solarCoId) dispatch(initializeUserDataToApi(solarCoId));
   }, [dispatch, step, solarCoId]);
+
+  useEffect(() => {
+    if(step === CALCULATE2) dispatch(updateUserDataToApi(userData));
+  }, [dispatch, userData, step]);
 
   useEffect(() => {
     if(step === CALCULATE3) dispatch(fetchSolarCalculations(userData.avg_bill, solarCoData));

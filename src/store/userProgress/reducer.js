@@ -1,16 +1,20 @@
 import Immutable from 'seamless-immutable';
 import {
-  SET_USER_DATA,
-  SET_STEP,
-  RESET_USER_DATA,
-  FETCH_USER_DATA,
-  FETCH_USER_DATA_LOADING,
-  FETCH_USER_DATA_DONE,
-  INIT_USER_DATA,
-  FETCH_USER_DATA_REJECTED,
-  INIT_USER_DATA_REJECTED,
-  LOADING,
-  CALCULATE1,
+    SET_USER_DATA,
+    SET_STEP,
+    RESET_USER_DATA,
+    FETCH_USER_DATA,
+    FETCH_USER_DATA_LOADING,
+    FETCH_USER_DATA_DONE,
+    INIT_USER_DATA,
+    FETCH_USER_DATA_REJECTED,
+    INIT_USER_DATA_REJECTED,
+    LOADING,
+    CALCULATE1,
+    UPDATE_USER_DATA,
+    UPDATE_USER_DATA_DONE,
+    UPDATE_USER_DATA_REJECTED,
+    CALCULATE3
 } from './actions';
 
 const initialState = Immutable({
@@ -36,6 +40,12 @@ export default function reduce(state = initialState, action = {}) {
     case INIT_USER_DATA:
       return state.merge({ step: CALCULATE1 });
     case INIT_USER_DATA_REJECTED:
+      return state.merge({ error: action.payload });
+    case UPDATE_USER_DATA_DONE:
+      return state.merge({ step: CALCULATE3 });
+    case UPDATE_USER_DATA:
+      return state.merge({ userData: action.payload });
+    case UPDATE_USER_DATA_REJECTED:
       return state.merge({ error: action.payload });
     case RESET_USER_DATA:
       return initialState;

@@ -1,5 +1,5 @@
 import { createAction } from 'promise-middleware-redux';
-import { getProgress, postProgress } from '../../services/demand-iq/demandIqApi';
+import { getProgress, postProgress, patchProgress } from '../../services/demand-iq/demandIqApi';
 import { getTopUrl } from '../../utils/getTopUrl';
 import { postCalculation } from '../../services/amazon-aws/amazonAwsApi';
 
@@ -59,6 +59,22 @@ export const [
         throw res.error;
       }
       return { step: CALCULATE1 };
+    });
+});
+
+export const [
+  updateUserDataToApi,
+  UPDATE_USER_DATA,
+  UPDATE_USER_DATA_LOADING,
+  UPDATE_USER_DATA_DONE,
+  UPDATE_USER_DATA_REJECTED
+] = createAction('UPDATE_USER_DATA_TO_API', userData => {
+  return patchProgress(userData)
+    .then(res => {
+      if(!res.ok) {
+        throw res.error;
+      }
+      return res.json();
     });
 });
 
