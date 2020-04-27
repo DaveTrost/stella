@@ -20,7 +20,7 @@ import {
     NEW_USER,
     CALCULATE2,
 } from '../../store/userProgress/actions';
-import { stepLookup, uiStepLookup } from './stellaMessages';
+import { stepLookup, uiStepLookup } from './lookupObjects';
 import Header from '../../components/Header/Header';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import StellaSez from '../../components/StellaSez/StellaSez';
