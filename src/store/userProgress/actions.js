@@ -1,6 +1,7 @@
 import { createAction } from 'promise-middleware-redux';
 import { getProgress, postProgress } from '../../services/demand-iq/demandIqApi';
 import { getTopUrl } from '../../utils/getTopUrl';
+import { postCalculation } from '../../services/amazon-aws/amazonAwsApi';
 
 export const LOADING = 'loading';
 export const NEW_USER = 'new-user';
@@ -8,6 +9,7 @@ export const CALCULATE1 = '/calculate1';
 export const CALCULATE2 = '/calculate2';
 export const CALCULATE3 = '/calculate3';
 export const INITIAL_AVG_BILL = '250';
+export const TEST_ZIP_CODE = '97213';
 
 export const [
   fetchUserDataFromApi,
@@ -57,6 +59,34 @@ export const [
         throw res.error;
       }
       return { step: CALCULATE1 };
+    });
+});
+
+export const [
+  fetchSolarCalculations,
+  SOLAR_CALCULATIONS,
+  SOLAR_CALCULATIONS_LOADING,
+  SOLAR_CALCULATIONS_DONE,
+  SOLAR_CALCULATIONS_REJECTED,
+] = createAction('FETCH_SOLAR_CALCULATIONS', (avgBill, solarCoData) => {
+
+  const {
+    offset: bill_offset,
+    product_apr: financing_rate,
+    product_term: financing_term,
+    dollar_per_watt: price_per_w,
+  } = solarCoData;
+
+  return postCalculation({
+    avg_bill: avgBill,
+    bill_offset, financing_rate, financing_term, price_per_w,
+    zipcode: TEST_ZIP_CODE,
+  })
+    .then(res => {
+      if(!res.ok) {
+        throw res.error;
+      }
+      return res.json()
     });
 });
 

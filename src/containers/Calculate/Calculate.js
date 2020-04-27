@@ -19,6 +19,8 @@ import {
     initializeUserDataToApi,
     NEW_USER,
     CALCULATE2,
+    fetchSolarCalculations,
+    CALCULATE3
 } from '../../store/userProgress/actions';
 import { stepLookup, uiStepLookup } from './lookupObjects';
 import Header from '../../components/Header/Header';
@@ -58,6 +60,9 @@ function Calculate() {
     }
   }, [dispatch, step, solarCoId]);
 
+  useEffect(() => {
+    if(step === CALCULATE3) dispatch(fetchSolarCalculations(userData.avgBill, solarCoData));
+  }, [dispatch, solarCoData, step, userData.avgBill]);
 
   const displayLoading = solarCoLoading || userDataLoading;
   const { uiStep, stellaMessages } = stepLookup[step];
