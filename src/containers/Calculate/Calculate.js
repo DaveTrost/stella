@@ -13,7 +13,7 @@ import {
 } from '../../store/userProgress/reducer';
 import {
     setUserData,
-    setStep,
+    setStepCalculate2,
     resetUserData,
     fetchUserDataFromApi,
     initializeUserDataToApi,
@@ -43,7 +43,7 @@ function Calculate() {
   const userData = useSelector(state => getUserData(state));
   const step = useSelector(state => getStep(state));
   const handleChange = event => dispatch(setUserData({ ...userData, avg_bill: event.target.value }));
-  const handleCalculate = () => dispatch(setStep(CALCULATE2));
+  const handleCalculate = () => dispatch(setStepCalculate2());
   const handleBack = () => dispatch(resetUserData());
 
 

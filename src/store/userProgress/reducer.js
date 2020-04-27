@@ -1,5 +1,6 @@
 import Immutable from 'seamless-immutable';
 import {
+    SET_STEP_CALCULATE_2,
     SET_USER_DATA,
     SET_STEP,
     RESET_USER_DATA,
@@ -41,6 +42,8 @@ export default function reduce(state = initialState, action = {}) {
       return state.merge({ step: CALCULATE1 });
     case INIT_USER_DATA_REJECTED:
       return state.merge({ error: action.payload });
+    case SET_STEP_CALCULATE_2:
+      return state.merge({ step: CALCULATE2 });
     case UPDATE_USER_DATA_DONE:
       return state.merge({ step: CALCULATE3 });
     case UPDATE_USER_DATA:
