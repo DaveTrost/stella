@@ -1,7 +1,7 @@
 # Demand-IQ Online Solar Estimate
 
 (Affectionately named for it's avatar, Stella)<br />
-You can run this project from it's deployment at https://solar-for-the-win.netlify.app, or you can build it according to the details below.
+You can run this project from it's deployment at https://solar-for-the-win.netlify.app, or you can build it according to the details below. If running from the deployed site, you need to be on a desktop browser, as mobile browsers seem not to play nicely with the proxy and the server's CORS requirements.
 
 ## Running the Project
 
