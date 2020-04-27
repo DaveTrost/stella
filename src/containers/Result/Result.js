@@ -48,11 +48,12 @@ function Result() {
   const handleBack = () => {
     dispatch(updateUserDataToApi({ ...initialState.userData, step: CALCULATE1 }));
     history.push('/calculate');
-  }
+  };
+  const handlePricing = () => 0;
 
   return (
     <div className='Result'>
-      <Header showStartOver={true} handleStartOver={handleBack} />
+      <Header showStartOver={true} handleStartOver={handleBack} handlePhone={() => 0} />
       <StellaSez avatar={avatar}>
         <Message text={`Check out these savings!`} />
         <InfoScroller items={results} />
@@ -62,7 +63,7 @@ function Result() {
           Let me know when you're ready to see pricing!
         `} />
       </StellaSez>
-      <ActionBar actionText={`I'm ready!`} smallText={finePrint} isDisplayed={true} />
+      <ActionBar actionText={`I'm ready!`} handleAction={handlePricing} handleBack={handleBack} smallText={finePrint} isDisplayed={true} />
       <Footer />
     </div>
   );
