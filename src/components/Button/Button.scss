@@ -1,0 +1,42 @@
+.StellaButton.white {
+  border: 1px solid #000000;
+  background: #FFFFFF;
+  label {
+    color: #000000;
+  }
+}
+
+.StellaButton.clear {
+  border: none;
+  background: transparent;
+  label {
+    color: #000000;
+  }
+}
+
+.StellaButton.black {
+  border: none;
+  background: #000000;
+  label {  
+    color: #FFFFFF;
+  } 
+}
+
+.StellaButton {
+  outline: none;
+  border-radius: 3px;
+}
+
+label {  
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  font-family: Perpetua;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.2em;
+  line-height: 1.2em;
+  text-align: center;
+  text-transform: uppercase;
+}

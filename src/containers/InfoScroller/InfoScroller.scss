@@ -1,0 +1,12 @@
+.InfoScroller {
+  display: block;
+  width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+
+  div+.InfoTable {
+    display: inline-block;
+    margin-right: 10px;
+  }
+}
