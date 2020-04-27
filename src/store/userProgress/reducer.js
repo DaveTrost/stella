@@ -35,14 +35,11 @@ export default function reduce(state = initialState, action = {}) {
         userData: action.payload, 
         step: action.payload.step,
       }); 
-    case INIT_USER_DATA:
-      return state.merge({step: CALCULATE1});
     case FETCH_USER_DATA_REJECTED: 
       return state.merge({ error: action.payload });
+    case INIT_USER_DATA:
+      return state.merge({step: CALCULATE1});
     case INIT_USER_DATA_REJECTED:
-      console.log('here');
-      console.log(action.payload);
-
       return state.merge({ error: action.payload });
     case RESET_USER_DATA:
       return initialState;
